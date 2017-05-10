@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="no" />
+    <title></title>
+    <script src="/Apps/boot.js?v=149" type="text/javascript"></script>
+    <script src="/Scripts/PlatForm/ComTools.js?v=149" type="text/javascript"></script>
+    <script src="/Apps/js/MobileSingleForm.js?v=149" type="text/javascript"></script>
+    <script src="/Form/Init/f97c722a-a50f-4828-bc9a-9cacd434ac58/edit/"></script>
+	<link href="/Apps/style/style.css?v=149" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" hasvelocity="true">
+        var OpenFormId = "34399717-2ebe-40fe-9fd7-bca7b76f54e4"
+        var FormId = "f97c722a-a50f-4828-bc9a-9cacd434ac58"
+        var FormState = "edit"
+        var KeyValue = ""
+        var SingleParams = ""
+        var strEpsProjId = "00000000-0000-0000-0000-0000000000a4"
+    </script>
+
+	 
+</head>
+<body>
+    <div class="listfile">
+        <div class="buttonlist">
+            <div class="button" id="add"><a href="javascript:;" onclick="PowerForm.AddWebForm(OpenFormId)"><i class="fa fa-plus-square"></i><span>新建</span></a></div>
+            <div class="button" id="del"><a href="javascript:;"><i class="fa fa-trash-o"></i><span>删除</span></a></div>
+            <!--<div class="button"><a href="javascript:;"><i class="fa fa-pencil"></i><span>编辑</span></a></div>
+            <div class="button"><a href="javascript:;"><i class="fa fa-eye"></i><span>查看</span></a></div>-->
+            <div class="button" style="border:0px;"><a href="#" id="nav"><i class="fa fa-github-square"></i><span>功能</span></a></div>
+        </div>
+	<div class="buttonlist1">
+		<div class="button ok" ><a href="#" onclick="PowerForm.OnBtnDel('V_PS_ContractInfo','ViewEntity')"><i class="fa fa-check"></i><span>删除</span></a></div>
+		<div class="button cancel" style="border:0px;"><a href="#"><i class="fa fa-times"></i><span>取消</span></a></div>
+	</div>
+        <ul id="V_PS_ContractInfo"></ul>
+    </div>
+    <div class="listdiv" id="listdiv">
+        <div class="navbg"></div>
+        <div class="navlist">
+            <div class="triangle-up"></div>
+            <ul>
+                <li><a href="index.html"><i class="fa fa-star-o"></i><span>收藏列表</span></a></li>
+                <li><a href="#" onclick="PowerForm.OpenQRCode()"><i class="fa fa-reply-all"></i><span>扫描二维码</span></a></li>
+                <li><a href="#"><i class="fa fa-arrows-h"></i><span>传输列表</span></a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        var PowerForm = new MobileSingleForm();
+        $(function () {
+		PowerForm.Init();
+            var dataparams={};
+            //dataparams.KeyWord="V_PS_ContractInfo";//关键词
+            //dataparams.select="";//需要查询哪些字段,默认空
+            //dataparams.KeyWordType="ViewEntity";//BO/ViewEntity;默认BO
+            //dataparams.swhere="EpsProjId='" + strEpsProjId + "'";//where条件，默认空
+            //dataparams.size="10";//每页条数，默认0
+            //dataparams.index="0";//当前多少页，默认0
+            dataparams.order="RegDate desc";//排序，默认空
+            var htmlparams={};
+            htmlparams.gridid = "V_PS_ContractInfo";//ul的id
+            htmlparams.icon = "";//左侧图标，默认fa-plus-square-o
+            htmlparams.formid = OpenFormId;//如果需要打开表单，表单的formid
+            htmlparams.idfield = "Id";//主键字段是什么
+            htmlparams.title = { value: "ContractName", format: "" };
+            htmlparams.left = { value: "RegDate", format: "yyyy-MM-dd" };
+            htmlparams.center = { value: "ContractAmount", format: "n2" };
+            htmlparams.right = { value: "Status", format: "combobox" };
+            PowerForm.LoadData(dataparams, htmlparams);
+        });
+        mini.parse();
+		
+         function abc(){
+		  PowerM3AppCallBack.pagepullup();
+		}
+    </script>
+</body>
+</html>

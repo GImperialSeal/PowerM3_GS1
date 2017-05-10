@@ -1,0 +1,662 @@
+﻿@charset "utf-8";
+/* CSS Document */
+*{
+	margin:0;
+	padding:0;
+}
+html{
+	font-size:10px; 
+	font-family: "微软雅黑";
+}
+body{ 
+	margin:0 auto;
+	max-width:640px; 
+	min-width:320px;
+}
+ul,li{ 
+	list-style:none;
+}
+img,hr{
+	border:0;
+}
+a{ 
+	text-decoration:none;
+	color:#000;
+}
+.clr {
+	clear:both;
+	height:0px;
+}
+.header{ 
+	background:#fff; 
+	position:fixed;
+	top:0px;left:0px;
+	width:100%;
+	height:60px;
+	z-index:11;
+}
+.head_top{ 
+	height:50px; 
+	background-size:100%; 
+	text-align:center; 
+	line-height:50px;
+	margin:5px 0px;
+}
+.head_top span{ 
+	float:right; 
+	color:#0074e1;
+	width:40px; 
+	height:50px; 
+	font-size:2rem;
+}
+
+.slideBox{ 
+	position:relative; 
+	overflow:hidden; 
+	margin:0px auto; 
+	max-width:100%;/* 设置焦点图最大宽度 */ 
+}
+.slideBox .hd1{ 
+	position:absolute;
+	height:28px; 
+	line-height:28px; 
+	bottom:0; 
+	text-align:center; 
+	width:100%;  
+	z-index:1;
+}
+.navlist ul li a{
+    font-size:14px;
+}
+.slideBox .hd1 li{
+	display:inline-block;
+	width:8px; 
+	height:8px;
+	-webkit-border-radius:5px; 
+	-moz-border-radius:5px; 
+	border-radius:5px;
+	background:#b8b8b8; 
+	text-indent:-9999px; 
+	overflow:hidden;
+	margin:0 6px;   
+}
+.slideBox .hd1 li.on{
+	background:#fff;  
+}
+.slideBox .bd1{ 
+	position:relative; 
+	z-index:0; 
+}
+.slideBox .bd1 li{
+	position:relative; 
+	text-align:center; 
+}
+.slideBox .bd1 li img{
+	vertical-align:top; 
+	width:100%;/* 图片宽度100%，达到自适应效果 */
+}
+.slideBox .bd1 li a{ 
+	-webkit-tap-highlight-color:rgba(0,0,0,0); 
+}
+
+.slideBox1{ 
+	position:relative; 
+	overflow:hidden;
+	margin:0px auto;  
+	max-width:100%; 
+	padding-bottom:27px;/* 设置焦点图最大宽度 */ 
+}
+.slideBox1 .hd2{ 
+	position:absolute;
+	height:28px; 
+	line-height:28px; 
+	bottom:0px; 
+	text-align:center; 
+	width:100%; 
+	background-color:#e9e9e9;
+	z-index:1; 
+}
+.slideBox1 .hd2 li{ 
+	display:inline-block; 
+	width:8px;
+	height:8px; 
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px; 
+	border-radius:5px; 
+	background:#333; 
+	text-indent:-9999px; 
+	overflow:hidden; 
+	margin:0 6px;   
+}
+.slideBox1 .hd2 li.on{
+	background:#2f8ce3; 
+}
+.slideBox1 .bd2{ 
+	position:relative; z-index:0; 
+}
+.slideBox1 .bd2 li{ 
+	position:relative;
+	text-align:center; 
+}
+.slideBox1 .bd2 .nav{
+	width:100%;
+	height:160px; 
+	background-color:#ffffff;
+}
+.slideBox1 .bd2 .nav-1,.slideBox1 .bd2 .nav-2{
+	width:100%;
+	display:box; 
+	height:80px;
+	-webkit-box-orient:horizontal;
+	-moz-box-orient:horizontal;
+	box-orient:horizontal;
+}
+.slideBox1 .bd2 .nav-1{
+	border-bottom:1px solid #dedede;
+}
+.slideBox1 .bd2 .nav .item{
+	width:25%;
+	float:left;
+	-webkit-box-flex:1;
+	-moz-box-flex:1;
+	box-flex:1;
+	border-right:1px solid #dedede;
+	display:box; 
+	box-sizing:border-box; 
+	font-size:1.4rem; 
+	text-align:center;
+	height:80px; 
+	line-height:30px;
+	vertical-align:middle;
+	padding-top:10px;
+	color:#6c6c6c;
+}
+.slideBox1 .bd2 .nav .item .icon{
+	display:block;
+	font-size:2.5rem; 
+}
+.slideBox1 .bd2 .nav .item .a{
+	color:#07a39b;
+}
+.slideBox1 .bd2 .nav .item .b{
+	color:#468ed1;
+}
+.slideBox1 .bd2 .nav .item .c{
+	color:#69b03c;
+}
+.slideBox1 .bd2 .nav .item .d{
+	color:#ffb21e;
+}
+.slideBox1 .bd2 .nav .item .e{
+	color:#ffad11;
+}
+.slideBox1 .bd2 .nav .item .f{
+	color:#50beb9;
+}
+.slideBox1 .bd2 .nav .item .g{
+	color:#d52516;
+}
+.slideBox1 .bd2 .nav .item .h{
+	color:#ef6653;
+}
+
+section{
+	margin:0 10px;
+}
+section ul li{ 
+	line-height:30px;
+	height:30px; 
+	border-bottom:1px dashed #ccc;
+}
+section ul li a{
+	font-size:1.4rem; 
+}
+section ul li .dot{
+	width:8px; 
+	height:8px; 
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px; 
+	background-color:#f85255;
+	display:inline-block;
+	margin:0 5px;
+}
+section ul li .time{
+	float:right; 
+	font-size:1.2rem; 
+	color:#666;
+}
+
+.footer{ 
+	width:100%; 
+	display:box;
+	-webkit-box-orient:horizontal;
+	-moz-box-orient:horizontal;
+	box-orient:horizontal;
+	border-top:1px solid #ddd;
+	background-color:#fff; 
+	position:fixed;
+	left:0px; 
+	bottom:0px; 
+	width:100%; 
+	display:block;
+	box-sizing:border-box;
+	height:60px;
+	line-height:25px;
+	padding-top:8px;
+} 
+.footer .item{
+	width:20%;
+	float:left;
+	-webkit-box-flex:1;
+	-moz-box-flex:1;
+	box-flex:1;
+	display:box; 
+	box-sizing:border-box; 
+	font-size:1.4rem; 
+	text-align:center;
+	height:60px; 
+	line-height:25px;
+	color:#9b9b9b;
+}
+.footer .item .icon{
+	display:block;
+	font-size:2rem; 
+}
+.footer .active{
+	color:#0074e1;
+}
+
+
+
+.listfile {
+	background-color: #fff;
+}
+
+.listfile .buttonlist {
+	width: 100%;
+	display: box;
+	height: 50px;
+	-webkit-box-orient: horizontal;
+	-moz-box-orient: horizontal;
+	box-orient: horizontal;
+	text-align: center;
+	background-color: #ffffff;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	border-bottom: 1px solid #ddd;
+	z-index: 10;
+	margin: auto;
+}
+
+.listfile .buttonlist .button {
+	margin: 5px 0px;
+	width: 20%;
+	float: left;
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
+	border-right: 1px solid #ddd;
+	display: box;
+	box-sizing: border-box;
+	font-size: 1.4rem;
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+	vertical-align: middle;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.listfile .buttonlist .button a {
+	color: #666;
+}
+
+.listfile .buttonlist .button span {
+	margin-left: 3px;
+}
+
+.listfile .buttonlist1{
+	width:100%;
+	display:box; 
+	height:50px;
+	-webkit-box-orient:horizontal;
+	-moz-box-orient:horizontal;
+	box-orient:horizontal;
+	text-align:center;
+	background-color:#ffffff;
+	position:fixed;
+	top:0px;
+	left:0px;
+	border-bottom:1px solid #ddd;
+	z-index:12;
+	display:none;
+}
+.listfile .buttonlist1 .button{
+	margin:5px 0px;
+	width:50%;
+	float:left;
+	-webkit-box-flex:1;
+	-moz-box-flex:1;
+	box-flex:1;
+	border-right:1px solid #ddd; 
+	display:box;
+	box-sizing:border-box;
+	font-size:1.4rem;
+	text-align:center;
+	height:40px;
+	line-height:40px;
+	vertical-align:middle;
+	white-space:nowrap;
+	overflow:hidden; 
+	text-overflow:ellipsis;     
+}
+.listfile .buttonlist1 .button a{
+	color:#666;
+}
+.listfile .buttonlist1 .ok a{
+    color:red;
+}
+.listfile .buttonlist1 .button span{
+	margin-left:3px;
+}
+
+
+#tablist {
+	width: 100%;
+	height: 100%;
+	margin-top: 51px;
+}
+
+#ul1 {
+height: 49px;
+width: 100%;
+display: box;
+background-color: #fff;
+color: #333;
+position: fixed;
+bottom: 0;
+left: 0px;
+-webkit-box-orient: horizontal;
+-moz-box-orient: horizontal;
+box-orient: horizontal;
+}
+
+#ul1 li {
+	display: inline-block;
+	line-height: 20px;
+	padding: 5px 0px;
+	float: left;
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
+	width: 20%;
+	font-size: 1.4rem;
+	text-align: center;
+}
+
+#ul1 li i {
+	font-size: 1.6rem;
+}
+
+#ul1 li.active {
+	background-color: #07a39b;
+	color: #fff;
+}
+
+#tablist section table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 55px;
+}
+
+#tablist section table td {
+border: 1px solid #ddd;
+line-height: 25px;
+font-size: 1.4rem;
+height: 35px;
+color: #000;
+padding-left: 5px;
+}
+
+#tablist div table td input {
+	width: 95%;
+	height: 23px;
+	margin: 5px 0px;
+	border: 1px solid #ccc;
+}
+
+
+.show {
+	display: block;
+	margin: 55px 5px;
+}
+
+.hide {
+	display: none;
+}
+
+.listdiv {
+	position: fixed;
+	top: 0;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	display: none;
+	z-index: 1000;
+}
+
+.listdiv .navbg {
+	filter: alpha(opacity=30);
+	-moz-opacity: 0.5;
+	opacity: 0.5;
+	background-color: #000;
+	width: 100%;
+	height: 100%;
+}
+
+.listdiv .navlist {
+	display: block;
+	background-color: #fff;
+	width: 120px;
+	position: absolute;
+	top: 50px;
+	left: 5px;
+	border: 1px solid #fff;
+	border-radius: 5px;
+}
+
+.listdiv .navlist ul li {
+	line-height: 30px;
+	border-bottom: 1px solid #ddd;
+	width: 100%;
+	text-indent: 8px;
+}
+
+.listdiv .navlist ul li:last-child {
+	border: 0px;
+}
+
+.listdiv .navlist ul li span {
+	margin-left: 5px;
+}
+
+.triangle-up {
+	width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid #fff;
+	position: absolute;
+	top: -10px;
+	left: 40%;
+}
+.mini-textbox-input, .mini-buttonedit-input{
+	font-size:1.4rem;
+}
+#tablist section table td {
+	padding: 0px 5px;
+}
+#FileAttach{
+    font-size:1.4rem;
+}
+.fileleft {
+    float: left;
+    width: 70%;
+    overflow: hidden;
+    display: block;
+     word-break: keep-all;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.fileright{
+    float:right;
+}
+#FileAttach li{
+    line-height:30px;
+}.adddiv{
+	position:absolute;
+	top:0;
+	left:0;
+	background-color:#fff;
+	width:100%;
+	height:100%;
+	overflow:scroll;
+	z-index:100;
+	display:none;
+}
+.adddiv .selectbutton{
+	position:fixed;
+	top:0;
+	left:0;
+	background-color:#fff;
+	width:100%;
+	line-height:50px;
+	text-align:center;
+	height:50px;
+	border-bottom:1px solid #ddd;
+}
+.adddiv .selectbutton a {
+    display:block;
+	float:left;
+    width:50%;
+    font-size: 1.4rem;
+	color: #07a39b;
+}
+.adddiv .selectbutton .ok{
+	background-color: #07a39b;
+    color: #fff;
+	border-bottom-color:#07a39b;
+}
+.adddiv section{
+	margin-top:55px;
+}
+.adddiv section table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.adddiv section table td {
+border: 1px solid #ddd;
+line-height: 25px;
+font-size: 1.4rem;
+height: 35px;
+color: #000;
+padding-left: 5px;
+}
+
+.adddiv div table td input {
+	width: 95%;
+	height: 23px;
+	margin: 5px 0px;
+	border: 1px solid #ccc;
+} 
+ .datalist {
+	margin:0 10px; 
+ }
+ .datalist  li{
+	height:60px;
+	line-height:60px;
+	border-bottom:1px solid #ccc;
+ }
+ .datalist  li div{
+	color:#666;
+	font-size:1.4rem;
+	line-height:25px;
+	float:left;
+	width:90%;
+	margin:5px 0px;
+ }
+  .datalist  li div p{
+	  width:100%;
+	  padding-left:5px;
+	  margin:0px;
+  }
+  .datalist  li div .title{
+	white-space:nowrap;
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	color:#000;
+  }
+  .datalist  li div .group{
+	display:box; 
+	font-size:1.2rem;
+	color:#666;
+	-webkit-box-orient:horizontal;
+	-moz-box-orient:horizontal;
+	box-orient:horizontal;
+  }
+  .datalist  li div .group span{
+	width:33%;
+	height:25px;
+	display:block;
+	white-space:nowrap;
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	text-indent:4px;
+	float:left;
+	-webkit-box-flex:1;
+	-moz-box-flex:1;
+	box-flex:1;
+ }
+ .datalist  li .left{
+	font-size:3rem;
+	width:8%;
+	float:left;
+	text-align:center;
+ }
+ .datalist  li .left input{
+	 display:none;
+ }
+ .datalist  li .right{
+	float:right;
+	width:2%;
+ }
+         div.tagsinput span.tag {
+            padding: 1px;
+            background: #ffb848;
+            color: white;
+            border-color: #ffb848;
+            border-right-width: 6px;
+        }
+
+            div.tagsinput span.tag a {
+                color: white;
+            }
+
+        div.tagsinput input {
+            padding: 1px;
+        }
+
+        .chats li {
+            font-size: 14px;
+        }
+
+            .chats li .name {
+                font-size: 12px;
+            }            #comment ul li{
+                height:auto;
+                line-height:auto;
+            }

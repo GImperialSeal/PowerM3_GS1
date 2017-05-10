@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="no" /> 
+    <title></title>
+    <script src="/Apps/boot.js?v=149" type="text/javascript"></script>
+    <script src="/Scripts/PlatForm/ComTools.js?v=149" type="text/javascript"></script>
+    <script src="/Apps/js/MobileWebForm.js?v=149" type="text/javascript"></script> 
+    <script src="/Form/Init/34399717-2ebe-40fe-9fd7-bca7b76f54e4/edit/d8597a4d-d090-4558-8d91-c1a07b89f061"></script>
+	<link href="/Apps/style/webformstyle.css?v=149" rel="stylesheet" type="text/css" />
+    <script src="/Apps/js/MobileWorkFlow.js?v=149" type="text/javascript"></script> 
+    <script src="/Apps/js/MobileWorkFlowForm.js?v=149" type="text/javascript"></script> 
+    <script src="/Scripts/PlatForm/WorkFlowsEnums.js?v=149" type="text/javascript"></script> 
+    <script type="text/javascript" hasvelocity="true">
+        var KeyValue = "d8597a4d-d090-4558-8d91-c1a07b89f061";
+        var FormId = "34399717-2ebe-40fe-9fd7-bca7b76f54e4";
+        var FormState = "edit";
+        var strEpsProjId = "00000000-0000-0000-0000-0000000000a4"
+        var KeyWord = "PS_IncomeContract";
+    </script>
+	  
+</head>
+
+<body>
+
+    <div class="listfile">
+	<!--此处有KeyWord，按需修改 -->
+	<!--此处为主表按钮-->
+			<!--命名规则为KeyWord_buttonlist-->
+        <div class="show buttonlist" id="PS_IncomeContract_buttonlist">
+             <div id="txtCurrentWorkInfoID" class="mini-textbox" enabled="false" style="display: none"></div>
+             <div id="txtCurrentSequeID" class="mini-textbox" enabled="false" style="display: none"></div>	<!-- <div class="button a"><a id="PS_IncomeContract.test" href="#" onclick="PowerForm.OpenWebForm('34399717-2ebe-40fe-9fd7-bca7b76f54e4','aab5a681-dcb0-41b0-83fa-7d4e086015c8')"><i class="fa fa-save"></i><span>ceshi</span></a></div>-->
+            <div class="button a"><a id="PS_IncomeContract.Save" href="#" onclick="PowerForm.OnBtnSave(this)"><i class="fa fa-save"></i><span>保存</span></a></div>
+            <div id="btnActive" class="button a" style="display:none" onclick="onExecute(this,'Update,Active');" ><a href="#"><i class="fa fa-thumbs-up"></i><span>送审</span></a></div>
+			<div id="btnSend" class="button a" style="display:none" onclick="onExecute(this,'Update,Send');"><a href="#"><i class="fa fa-thumbs-up"></i><span>同意</span></a></div>
+            <div id="btnReturn" class="button a" style="display:none" onclick="onExecute(this,'Update,Return');"><a href="#"><i class="fa fa-mail-reply"></i><span>驳回</span></a></div>
+			<div id="btnPrint" class="button a" style="border: 0px;  width: 30%"><a href="#" id="print"><i class="fa fa-print"></i><span>打印</span></a></div>
+        </div>
+		<!--此处有KeyWord，按需修改 -->
+		<!--此处为子表按钮，多个子表将div复制多份，不要超过2个子表，否则手机显示不下-->
+			<!--命名规则为KeyWord_buttonlist-->
+		<div  class="hide buttonlist" id="PS_IncomeContract_PayNodes_buttonlist">
+		<div class="button a" ><a href="#" id="PS_IncomeContract_PayNodes.Add" onclick="PowerForm.OnBtnAdd(this)"><i class="fa fa-plus"></i><span>新增</span></a></div>
+            <div class="button a"><a href="#" id="PS_IncomeContract_PayNodes.Delete" class="delete" onclick="PowerForm.ShowDel(this)" ><i class="fa fa-trash"></i><span>删除</span></a></div>
+		</div>
+		<!--此处为附件按钮，原样复制-->
+		<div  class=" hide buttonlist" id="file_buttonlist">
+		 <div id="btnUpload" class="button" style="border: 0px;  width: 30%"><a href="#" id="nav"><i class="fa fa-cloud-upload"></i><span>上传图片</span></a></div>
+		 <div id="btnUploadMedia" class="button" style="border: 0px;  width: 30%"><a href="#" id="media"><i class="fa fa-cloud-upload"></i><span>上传视频</span></a></div>
+		 <div id="btnUploadAudio" class="button" style="border: 0px;  width: 30%"><a href="#" id="audio"><i class="fa fa-cloud-upload"></i><span>上传音频</span></a></div>
+		</div>
+		<!--此处有KeyWord，按需修改 -->
+		<!--此处为子表1的删除时的确定删除按钮，多个子表将div复制多份-->
+			<!--命名规则为KeyWord_buttonlist1-->
+	<div class="buttonlist1" id="PS_IncomeContract_PayNodes_buttonlist1">
+		<div class="button ok" ><a href="#" onclick="PowerForm.OnBtnDel('PS_IncomeContract_PayNodes','BO')"><i class="fa fa-check"></i><span>删除</span></a></div>
+		<div class="button cancel" style="border:0px;"><a   href="#" onclick="PowerForm.CancelDel('PS_IncomeContract_PayNodes')"><i class="fa fa-times"></i><span>取消</span></a></div>
+	</div>
+        <div id="tablist">
+		<!--此处有KeyWord，按需修改-->
+		<!--此处为主表控件位置-->
+            <section id="PS_IncomeContract" class=" form show"> 
+                <table border="0" cellspacing="1">
+                    <tr>
+                        <td width="30%">合同编号</td>
+                        <td width="70%">
+                            <input id="PS_IncomeContract.ContractCode" name="ContractCode" class="mini-textbox" required="true" requirederrortext="合同编号不能为空" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>合同状态</td>
+                        <td>
+                            <input id="PS_IncomeContract.Status" name="Status" class="mini-combobox" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>合同名称</td>
+                        <td>
+                            <input id="PS_IncomeContract.ContractName" name="ContractName" class="mini-textbox" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>合同金额</td>
+                        <td>
+                            <input id="PS_IncomeContract.ContractAmount" name="ContractAmount" class="mini-spinner" llowlimitvalue="true" minvalue="0" maxvalue="999999999999999" changeonmousewhere="false" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>甲方</td>
+                        <td>
+                              <input id="PS_IncomeContract.PartyA" name="PartyA" textname="PartyA" class="mini-buttonedit"
+                                                emptytext="请选择甲方..." onbuttonclick="PowerForm.OnBtnWizard(this)"  allowinput="false" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>录入日期</td>
+                        <td>
+                            <input id="PS_IncomeContract.RegDate" name="RegDate"   class="mini-datepicker" />
+                        </td>
+                    </tr>
+                </table> 
+            </section>			
+			<!--此处有KeyWord，按需修改-->
+			<!--此处为子表1列表位置，多个子表复制多份，data-potions中，填写主键字段和4个显示的字段名，样式与窗体是一样的-->
+            <section class="hide" id="PS_IncomeContract_PayNodes" data-potions='{"idfield":"Id","title":{"value":"PayNodes","format":""},"left":{"value":"PayType","format":"combobox"},"center":{"value":"PayAmount","format":"n2"},"right":{"value":"PayDescription","format":""}}'>
+                <ul class="datalist"></ul>
+            </section>
+		<!--此处为附件，原样复制-->
+            <section class="hide" id="file">
+                <ul id="FileAttach"></ul>
+            </section> 
+		<!--此处为评论，原样复制-->
+            <section class="hide" id="comment">
+                <div id="tagcomment"></div>
+            </section> 
+			<!--此处为页签div，类似原表单中的tabs-->
+            <ul id="ul1">
+                <li class="active"><i class="fa fa-home"></i></br><span>基本信息</span></li>
+                <li><i class="fa fa-cogs"></i></br><span>收款节点</span></li>
+                <li><i class="fa fa-file"></i></br><span id="filecount">附件(0)</span></li>
+                <li><i class="fa fa-comments"></i></br><span id="filecount">评论</span></li>
+            </ul>
+        </div>
+    </div>
+	
+	 <!--此处为附件按钮，原样复制-->
+    <div class="listdiv" id="listdiv">
+        <div class="navbg"></div>
+        <div class="navlist">
+            <div class="triangle-up"></div>
+            <ul>
+                <li><a href="javascript:void(0)" onclick="PowerForm.OpenCamera()">打开相机</a></li>
+                <li><a href="javascript:void(0)" onclick="PowerForm.OpenGallery()">打开相册</a></li> 
+            </ul>
+        </div>
+    </div>
+    <div class="listdiv" id="listmedia">
+        <div class="navbg"></div>
+        <div class="navlist" style="left:125px">
+            <div class="triangle-up"></div>
+            <ul>
+                <li><a href="javascript:void(0)" onclick="PowerForm.RecordVideos()">录像</a></li>
+                <li><a href="javascript:void(0)" onclick="PowerForm.OpenVideos()">打开视频</a></li> 
+            </ul>
+        </div>
+    </div>
+    <div class="listdiv" id="listaudio">
+        <div class="navbg"></div>
+        <div class="navlist" style="left:245px">
+            <div class="triangle-up"></div>
+            <ul>
+                <li><a href="javascript:void(0)" onclick="PowerForm.OpenCamera()">录音</a></li>
+                <li><a href="javascript:void(0)" onclick="PowerForm.OpenGallery()">打开音频</a></li> 
+            </ul>
+        </div>
+    </div>
+	
+    <div class="listdiv" id="listprint"> 
+    </div>
+			<!--此处有KeyWord，按需修改-->
+			<!--此处为子表1的新增时弹出填写页面-->
+			<!--命名规则为KeyWord_AddTable-->
+	<div class="adddiv" id="PS_IncomeContract_PayNodes_AddTable">
+		<p class="selectbutton">
+			<a href="#" class="ok" id="PS_IncomeContract_PayNodes.Ok" onclick="PowerForm.OnBtnOk(this)">确定</a>
+			<a href="#" id="PS_IncomeContract_PayNodes.Cancel" onclick="PowerForm.OnBtnCancel(this)">取消</a>
+		</p>
+			<!--命名规则为KeyWord_Form-->
+		<section id="PS_IncomeContract_PayNodes_Form" class="form">
+			<table border="0" cellspacing="1" >
+				<tr>
+					<td width="30%">节点名称</td>
+					<td width="70%"> <input id="PS_IncomeContract_PayNodes.PayNodes" name="PayNodes" class="mini-textbox" /></td>
+				</tr>
+				<tr>
+					<td><span>收款类型</span></td>
+					<td>    <input id="PS_IncomeContract_PayNodes.PayType" name="PayType" class="mini-combobox" /></td>
+				</tr>
+				<tr>
+					<td>收款金额</td>
+					<td> <input id="PS_IncomeContract_PayNodes.PayAmount" name="PayAmount" class="mini-spinner" /></td>
+				</tr>
+				
+				
+				<tr>
+					<td>描述</td>
+					<td><input id="PS_IncomeContract_PayNodes.PayDescription" name="PayDescription" class="mini-textbox" /></td>
+				</tr>
+				<tr>
+					<td>备注</td>
+					<td><input id="PS_IncomeContract_PayNodes.Remarks" name="Remarks" class="mini-textbox" /></td>
+				</tr>
+				
+				
+			</table>
+		</section>
+		
+	</div>
+
+
+    <script type="text/javascript">
+        var PowerForm = new MobileWebForm();
+
+        $(function () {
+		PowerForm.Init();
+            
+        });
+        mini.parse();
+        
+       
+    </script>
+</body>
+</html>

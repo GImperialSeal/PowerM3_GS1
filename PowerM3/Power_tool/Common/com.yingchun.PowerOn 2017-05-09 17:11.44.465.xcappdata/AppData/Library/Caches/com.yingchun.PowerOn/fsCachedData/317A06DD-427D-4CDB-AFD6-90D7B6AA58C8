@@ -1,0 +1,500 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title></title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="no" />
+    <script src="/Apps/js/TouchSlide.1.1.js"></script>
+    <script src="/Apps/js/jquery-1.8.3.min.js"></script>
+	<script src="/Apps/boot.js?v=149" type="text/javascript"></script>
+    <script src="/Scripts/PlatForm/ComTools.js?v=149" type="text/javascript"></script>
+    <script src="/Apps/js/MobileSingleForm.js?v=149" type="text/javascript"></script>
+    <script src="/Scripts/plugins/echarts/echarts.js"></script>
+	
+    <link href="/Apps/style/style.css" rel="stylesheet" type="text/css" />
+    <link href="/Apps/style/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	 <script type="text/javascript" hasvelocity="true">
+        var OpenFormId = "$Model.data.OpenFormId"
+        var FormId = "$Model.data.FormId"
+        var FormState = "$Model.data.FormState"
+        var KeyValue = "$Model.data.KeyValue"
+        var SingleParams = ""
+        var strEpsProjId = ""
+		var  EpsProjLongCode=""
+    </script>
+    <style>
+        body {
+            background-color: #ebebeb;
+        }
+        .send-head {
+            border: 1px solid ;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+            .send-head .left {
+                width: 50%;
+                float: left;
+                text-indent: 10px;
+                vertical-align: middle;
+                color: #fff;
+                padding: 15px 0px;
+                border-top-left-radius: 5px;
+            }
+
+            .send-head .right {
+                width: 50%;
+                float: left;
+                text-align: right;
+                padding-right: 15px;
+                padding: 15px 0px; 
+                border-top-right-radius: 5px;
+            }
+
+                .send-head .right h3 {
+                    font-size: 3rem;
+                    line-height: 34px;
+                    color: #fff;
+                    margin-right: 15px;
+                }
+				.send-head .right h4 {
+                   
+                    
+                    color: #fff;
+                    margin-right: 15px;
+                }
+                .send-head .right span {
+                    font-size: 1.2rem;
+                    color: #fff;
+                    margin-right: 15px;
+                }
+				.send-head .right .datas {
+                    font-size: 1.2rem;
+                    color: #fff;
+                    margin-right: 15px;
+                }
+				.send-head .right .datas span{
+					
+					text-indent:2px;
+				}
+            .send-head p {
+                clear: both;
+                background-color: #fff;
+                line-height: 30px;
+                text-indent: 15px;
+                font-size: 1.4rem;
+                color: #2a6496;
+                border-bottom-right-radius: 5px;
+                border-bottom-left-radius: 5px;
+				margin-bottom:0px;
+            }
+
+                .send-head p span {
+                    float: right;
+                    margin-right: 15px;
+                }
+
+        .send {
+            border: 1px solid #ddd;
+            margin: 10px;
+            height: 150px;
+            background-color:#fff;
+            border-radius: 5px;
+        }
+
+        .sendline {
+            border: 1px solid #ddd;
+            margin: 10px;
+            height: 250px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+            .send h3 {
+                font-size: 1.6rem;
+                margin: 5px 0px;
+                margin-left: 15px;
+                border-left: 2px solid;
+                padding-left: 10px;
+            }
+			
+            .send .left {
+                width: 50%;
+                float: left;
+                text-align: center;
+                vertical-align: middle;
+                margin-top: 8px;
+            }
+
+                .send .left span {
+                    display: block;
+                }
+
+                .send .left .num {
+                    font-size: 4.5rem;
+                    color: #f00;
+                }
+
+                .send .left .solve {
+                    font-size: 1.6rem;
+                    color: #f00;
+                }
+
+            .send .right {
+                width: 50%;
+                float: left;
+                text-align: center;
+                margin: 10px 0px;
+            }
+
+                .send .right a {
+                    display: block;
+                    line-height: 30px;
+                    width: 80px;
+                    border: 1px solid #ddd;
+                    margin: 7px 30px;
+                    background-color: #f4f4f4;
+                    font-size: 1.4rem;
+                }
+
+                    .send .right a span {
+                        padding-left: 5px;
+                        color: #f00;
+                    }
+
+                    .send .right a .b {
+                        color: green;
+                    }
+        .panel-green  {
+			border-color: #5cb85c !important;
+			background-color: #5cb85c !important;
+        }
+        .panel-blue {
+            border-color: #428bca !important;
+            background-color: #428bca !important;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="send-head panel-green" onclick="OpenWFNotify('Project','企业在建项目')">
+        <div class="left">
+            <i class="fa fa-tasks fa-5x"></i>
+        </div>
+        <div id='Text1' class="right">
+           
+        </div>
+        <p>企业在建项目个数<span><i class="fa fa-arrow-circle-right"></i></span></p>
+    </div>
+    <div class="send-head panel-blue"  onclick="OpenWFNotify('problem','待协调问题')">
+        <div class="left">
+            <i class="fa fa-shopping-cart fa-5x"></i>
+        </div>
+        <div id='Text2' class="right">
+			
+        </div>
+        <p>待协调问题个数<span><i class="fa fa-arrow-circle-right"></i></span></p>
+    </div>
+     <div class="send sendline">
+        <h3>项目状态统计</h3>
+        <div>
+          <div id="pieleft" class="left" style="height:180px;width:100%;"></div>
+        </div>
+    </div>
+    <div class="send sendline" >
+        <h3>散点图</h3>
+        <div id="line" style="height:200px;width:100%;">
+
+        </div>
+         
+    </div> 
+    <script type="text/javascript">
+		 var Session;
+        $(function () { 
+		    LoadDatas();
+            
+        });
+		function LoadDatas(){
+			$.ajax({
+                url: "/App/GetSession",               
+                type: "POST",
+				async:"true",
+                success: function (text) {
+                  Session = mini.decode(text);
+				if(Session.EpsIsProject==1){
+					window.location.href="/Apps/Projectinform.html?EpsProjId="+Session.EpsProjId+"&OpenType=P"; 
+				}
+                  load_line(Session.EpsProjId); 
+				  load_text1(Session.EpsProjLongCode);
+				  load_text2(Session.EpsProjLongCode);
+				  load_pieleft(Session.EpsProjLongCode);
+                }
+
+            });
+		}
+		function load_text2(EpsProjLongCode){
+			var p = { KeyWord: "PS_ProjectIssue", index: "0", size: "0" };
+            p.swhere = "IssueStatus<>'03' and  EpsProjId in ( select project_guid  from pln_project  where LongCode='" + EpsProjLongCode + "' or LongCode like '" + EpsProjLongCode + ".%' )";;
+			 FormFuns.GridPageLoad(p, function (rlt) {
+                if (!rlt.success) {
+                    Power.ui.alert(rlt.message);
+                    return;
+                }
+                var rs = mini.decode(rlt.data.value);
+				var yb=0;zd=0;yz=0;
+				for (var i = 0; i < rs.length; i++) {
+					var d = rs[i];
+					if(d.IssueLevel=="1"){
+						yb++;
+					}
+					if(d.IssueLevel=="2"){
+						zd++;
+					}
+					if(d.IssueLevel=="3"){
+						yz++;
+					}
+				}
+				//'<span>一般：&nbsp;'+yb+'个 &nbsp;&nbsp;中等:&nbsp;'+zd+'个 &nbsp;&nbsp;严重&nbsp;'+yz+'个</span>';
+				var Html1='<h4>总数:'+rs.length+' </h4>'+
+				'<p class="datas"><span>一般:'+yb+'</span><span>中等:'+zd+'</span><span>严重:'+yz+'</span></p>';
+				
+				 $("#Text2").append(Html1);
+			})
+		}
+		function load_text1(EpsProjLongCode){
+			
+			var p = { KeyWord: "V_PS_EPM_ProjectList", KeyWordType: "ViewEntity", index: "0", size: "0" };
+            p.swhere = "1=1 and (LongCode='" + EpsProjLongCode + "' or LongCode like '" + EpsProjLongCode + ".%')";;
+			 FormFuns.GridPageLoad(p, function (rlt) {
+                if (!rlt.success) {
+                    Power.ui.alert(rlt.message);
+                    return;
+                }
+                var rs = mini.decode(rlt.data.value);
+				 var zh = 0, zc = 0;
+				for (var i = 0; i < rs.length; i++) {
+					var d = rs[i];
+					var act = d.act_complete_pct.toFixed(2);
+					var pln = d.plan_complete_pct.toFixed(2);
+					if (act < pln )
+						zh++;
+					else 
+						zc++;
+					
+				}
+				var Html1='<h4>总数:'+rs.length+' </h4>'+
+				'<span>正常：&nbsp;'+zc+'个 &nbsp;&nbsp;滞后：&nbsp;'+zh+'个</span>';
+				 $("#Text1").append(Html1);
+			})
+
+		}        function load_pieleft(longcode){
+		   loadGridData(longcode);
+		}
+		
+		
+		function loadGridData(longcode) {
+            debugger;
+            var p = { KeyWord: "V_PS_EPM_ProjectList", KeyWordType: "ViewEntity", index: "0", size: "0" };
+            p.swhere = "1=1 and (LongCode='" + longcode + "' or LongCode like '" + longcode + ".%')";
+            FormFuns.GridPageLoad(p, function (rlt) {
+                if (!rlt.success) {
+                    Power.ui.alert(rlt.message);
+                    return;
+                }
+                var rs = mini.decode(rlt.data.value);
+                put_ProjState(rs);
+               });
+        }
+		function put_ProjState(data) {
+            var yz = 0, zh = 0, cq = 0, zc = 0;
+            for (var i = 0; i < data.length; i++) {
+                var d = data[i];
+                var act = d.act_complete_pct.toFixed(2);
+                var pln = d.plan_complete_pct.toFixed(2);
+                if (act - pln >= 0)
+                    cq++;
+                else if (pln - act > 0 && pln - act <= 5)
+                    zc++;
+                else if (10 >= pln - act > 5)
+                    zh++;
+                else if (pln - act > 10)
+                    yz++
+            }
+
+		   var  opt = {   
+				tooltip : {
+					trigger: 'axis'
+				},
+				legend: {
+					data:['正常数量','超前数量','滞后数量','严重滞后']
+				},
+				xAxis : [
+					{
+						type : 'value'
+					}
+				],
+				yAxis : [
+					{
+						type : 'category',
+						data : ['']
+					}
+				],
+				grid: { // 控制图的大小，调整下面这些值就可以，
+                    x: 30,
+					x2: 30,
+                    y: 20,
+                    y2: 20
+
+                },
+				series : [
+					{
+						name:'正常数量',
+						type:'bar',
+						data:[zc]
+					},
+					{
+						name:'超前数量',
+						type:'bar',
+						data:[cq]
+					},
+					{
+						name:'滞后数量',
+						type:'bar',
+						data:[zh]
+					},
+					{
+						name:'严重滞后',
+						type:'bar',
+						data:[yz]
+					}
+				]
+			};
+			
+            InitEChart("pieleft", opt);
+        }
+       
+         function load_line(currenttask) {
+            var p = {};
+            p.EpsProjId = currenttask;
+          
+            $.ajax({
+                url: "/Portal/GetProjectscatterCharts",
+                data: p,
+                type: "POST",
+                success: function (text) {
+                    var o = mini.decode(text);
+                    if (o.success) {
+
+                        LoadChart1(o.list);
+
+                    }
+                }
+
+            });
+        }
+        function LoadChart1(datas) {
+            var lengdata = [];
+            var seriesdata = [];
+            $.each(datas, function () {
+                //lengdata.push(this.project_name);
+                var value1 = Math.floor(this.act_complete_pct * 100) / 100;
+                var value2 = Math.floor(this.plan_complete_pct * 100) / 100;
+                var item = { name: this.project_name, type: 'scatter', data: [[value1, value2, { id: this.proj_guid }]] }
+                seriesdata.push(item);
+            })
+            var opt = {
+                title: {
+                    show: false
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    showDelay: 0,
+                    formatter: function (params) {
+                        if (params.value.length > 1) {
+                            return params.seriesName + ' :<br/>'
+                               + '实际完成' + params.value[0] + '%<br/>'
+                               + '计划完成 ' + params.value[1] + '%';
+                        }
+                        else {
+                            return params.seriesName + ' :<br/>'
+                               + params.name + ' : '
+                               + '计划完成 ' + params.value[1] + '%';
+                        }
+                    },
+                    axisPointer: {
+                        show: true,
+                        type: 'cross',
+                        lineStyle: {
+                            type: 'dashed',
+                            width: 1
+                        }
+                    }
+                },
+                legend: {
+                    data: lengdata
+                },
+                grid: { // 控制图的大小，调整下面这些值就可以，
+                    x: 50,
+                    y: 20,
+                    y2: 20
+
+                },
+                xAxis: [
+                    {
+                        name: '实际完成',
+                        type: 'value',
+                        scale: true,
+                        min: 0, max: 100,
+                        axisLabel: {
+                            formatter: '{value} %'
+                        }
+                    }
+                ],
+                yAxis: [
+                    {
+                        name: '计划完成',
+                        type: 'value',
+                        scale: true,
+                        min: 0, max: 100,
+                        axisLabel: {
+                            formatter: '{value} %'
+                        }
+                    }
+                ],
+                series: seriesdata
+            };
+
+            InitEChart("line", opt);
+        }
+		function OpenWFNotify(types,title) {
+        var url = "/Apps/ProjectManagerList.html?EpsProjLongCode="+Session.EpsProjLongCode+"&types=" + types;
+        CallAppFunction("appOpenNewWebView", '{"url":"' + url + '","pullUp":"true","pullDown":"true","showTabbar":"true","title":"' + title + '"}',url);
+		}
+        //渲染图表
+        function InitEChart(chartid, option) {
+            require.config({
+                paths: {
+                    echarts: '/Scripts/plugins/echarts/'
+                }
+            });
+            require([
+                'echarts',
+                'echarts/theme/default',
+                'echarts/chart/line',   // 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表gauge
+                'echarts/chart/bar',
+				 'echarts/chart/pie',
+				'echarts/chart/gauge',
+				'echarts/chart/scatter'
+            ], function (ec, theme) {
+                var myChart = ec.init(document.getElementById(chartid), theme);
+                myChart.setOption(option);
+            })
+        }
+    </script>
+</body>
+</html>

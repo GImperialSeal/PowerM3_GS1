@@ -1,0 +1,66 @@
+
+/* Class = "UIButton"; normalTitle = "开始扫描"; ObjectID = "1d6-eg-BPV"; */
+"1d6-eg-BPV.normalTitle" = "开始扫描";
+
+/* Class = "UINavigationItem"; title = "录制"; ObjectID = "7o4-CH-T74"; */
+"7o4-CH-T74.title" = "录制";
+
+/* Class = "UIButton"; normalTitle = "更多"; ObjectID = "7x1-ro-3B8"; */
+"7x1-ro-3B8.normalTitle" = "更多";
+
+/* Class = "UIButton"; normalTitle = "播放"; ObjectID = "B1a-gV-ljh"; */
+"B1a-gV-ljh.normalTitle" = "播放";
+
+/* Class = "UITextField"; placeholder = "请输入您的用户名"; ObjectID = "CKt-zv-hM4"; */
+"CKt-zv-hM4.placeholder" = "请输入您的用户名";
+
+/* Class = "UITextField"; text = "zengmei"; ObjectID = "CKt-zv-hM4"; */
+"CKt-zv-hM4.text" = "zengmei";
+
+/* Class = "UILabel"; text = "新录音 12"; ObjectID = "Fcq-dB-WhB"; */
+"Fcq-dB-WhB.text" = "新录音 12";
+
+/* Class = "UILabel"; text = "2017/1/5"; ObjectID = "GJy-ta-XZj"; */
+"GJy-ta-XZj.text" = "2017/1/5";
+
+/* Class = "UILabel"; text = "00:00:00"; ObjectID = "HDx-FR-1J5"; */
+"HDx-FR-1J5.text" = "00:00:00";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "HqF-ZS-qAT"; */
+"HqF-ZS-qAT.text" = "Label";
+
+/* Class = "UILabel"; text = "2016/12/21"; ObjectID = "JPR-or-fVg"; */
+"JPR-or-fVg.text" = "2016/12/21";
+
+/* Class = "UILabel"; text = "2014 © 上海普华科技发展股份有限公司"; ObjectID = "LUu-uu-dyp"; */
+"LUu-uu-dyp.text" = "2014 © 上海普华科技发展股份有限公司";
+
+/* Class = "UILabel"; text = "记住密码"; ObjectID = "Lfs-b7-Qhd"; */
+"Lfs-b7-Qhd.text" = "记住密码";
+
+/* Class = "UITextField"; placeholder = "请输入您的密码"; ObjectID = "T2c-Rp-0Xm"; */
+"T2c-Rp-0Xm.placeholder" = "请输入您的密码";
+
+/* Class = "UITextField"; placeholder = "请输入网址"; ObjectID = "XjU-Zg-i0C"; */
+"XjU-Zg-i0C.placeholder" = "请输入网址";
+
+/* Class = "UITextField"; text = "dev.p3china.com:9508"; ObjectID = "XjU-Zg-i0C"; */
+"XjU-Zg-i0C.text" = "dev.p3china.com:9508";
+
+/* Class = "UILabel"; text = "00:00.00"; ObjectID = "Xlg-to-9T3"; */
+"Xlg-to-9T3.text" = "00:00.00";
+
+/* Class = "UIButton"; normalTitle = "返回"; ObjectID = "YmB-AI-wko"; */
+"YmB-AI-wko.normalTitle" = "返回";
+
+/* Class = "UIButton"; normalTitle = "完成"; ObjectID = "aJK-c1-ecb"; */
+"aJK-c1-ecb.normalTitle" = "完成";
+
+/* Class = "UILabel"; text = "新录音"; ObjectID = "eQw-a2-wUZ"; */
+"eQw-a2-wUZ.text" = "新录音";
+
+/* Class = "UIButton"; normalTitle = "登录"; ObjectID = "nEY-Do-Fzf"; */
+"nEY-Do-Fzf.normalTitle" = "登录";
+
+/* Class = "UILabel"; text = "上海普华科技有限公司\n普华风力"; ObjectID = "uUK-EG-U1D"; */
+"uUK-EG-U1D.text" = "上海普华科技有限公司\n普华风力";

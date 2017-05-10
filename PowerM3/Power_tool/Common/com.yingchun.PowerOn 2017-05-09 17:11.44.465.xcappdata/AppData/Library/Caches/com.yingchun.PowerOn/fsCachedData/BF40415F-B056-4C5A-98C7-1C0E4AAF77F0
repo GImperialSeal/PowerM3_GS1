@@ -1,0 +1,224 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title></title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="no" />
+    <script src="/Scripts/PlatForm/ComTools.js"></script>
+    <script src="/Apps/js/TouchSlide.1.1.js"></script>
+    <script src="/Apps/Common.js"></script>
+    <script src="/Apps/js/jquery-1.8.3.min.js"></script>
+    <script src="/WebCenter/MenuEpsJson/menu" type="text/javascript"></script>
+    <link href="style/style.css" rel="stylesheet" type="text/css" />
+    <link href="style/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+    <div id="slideBox" class="slideBox">
+        <div class="bd1">
+            <ul id="pic">
+                <li><a href="#"><img src="images/banner1.jpg"></a></li>
+                <li><a href="#"><img src="images/banner2.png"></a></li>
+                <li><a href="#"><img src="images/banner3.jpg"></a></li>
+                <li><a href="#"><img src="images/banner4.jpg"></a></li>
+                <li><a href="#"><img src="images/banner5.jpg"></a></li>
+            </ul>
+        </div>
+        <div class="hd1">
+            <ul></ul>
+        </div>
+    </div>
+    <div id="slideBox1" class="slideBox1">
+        <div class="bd2">
+            <ul id="menu"></ul>
+        </div>
+        <div class="hd2">
+            <ul></ul>
+        </div>
+    </div>
+    <section>
+        <ul id="PS_ProjectEvents"></ul>
+
+    </section>
+
+    <script type="text/javascript">
+        TouchSlide({
+            slideCell: "#slideBox",
+            titCell: ".hd1 ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+            mainCell: ".bd1 ul",
+            effect: "leftLoop",
+            autoPage: true,//自动分页
+            autoPlay: true //自动播放
+        });
+        $(function () {
+            //$.ajax({
+            //    url: "/WebCenter/MenuEpsJson",
+            //    data: { menueps: "menu" },
+            //    cache: false,
+            //    success: function (text) {
+
+            //        debugger;
+            //    }
+            //})
+            var x = 1;//每页八个，>8时，重置为1
+            var html = "";
+            for (var i = 0; i < _menulist.length; i++) {
+                var menu = _menulist[i];
+                if (menu.ParentId && menu.ParentId == "dddddddd-0000-0000-0000-000000000000") {
+                    var mclass = "";
+                    if (menu.IconColor != null)
+                        mclass += "style=\"color:" + menu.IconColor + "\" ";
+                    if (x == 1)
+                        html += " <li><div class=\"nav\"><div class=\"nav-1\">";
+                    var cl = "openchild('" + menu.Id + "','" + menu.Name + "')";
+                    if (menu.LinkWidget == "1")
+                        cl = "openmenu('" + menu.Id + "','" + menu.Name + "')";
+                    html += "<div class=\"item\" href=\"#\" onclick=\"" + cl + "\">" +
+                           " <span class=\"icon a\"><i class=\"fa " + menu.IconClass16 + "\" " + mclass + " aria-hidden=\"true\"></i></span>" +
+                           " <span class=\"tab-label\">" + menu.Name + "</span>" +
+                        "</div>";
+                    if (x == 4)
+                        html += "</div>   <div class=\"nav-2\">";
+                    if (x == 8 || i == _menulist.length - 1) {
+                        html += "        </div></div></li>";
+                        x = 1;
+                    }
+                    else
+                        x++;
+                }
+            }
+            $("#menu").html(html);
+            //加载通知
+            $.ajax({
+                url: "/Form/GridPageLoad",
+                data: { KeyWord: 'PS_ProjectEvents', KeyWordType: 'BO', select: 'Id,Code,Title,RegDate', swhere: '', sort: 'RegDate desc', index: '0', size: '8' },
+
+                type: 'post',
+                success: function (text) {
+                    var o = jQuery.parseJSON(text);
+                    if (o.success) {
+                        var data = jQuery.parseJSON(o.data.value);
+                        var html = '';
+                        if (data) {
+                            for (var i = 0; i < data.length; i++) {
+                                var time = "";
+                                if (typeof (data[i].RegDate.Format) == "function")
+                                    time = data[i].RegDate.Format("yyyy-MM-dd");
+                                else
+                                    time = data[i].RegDate.toString().split('T')[0];
+                                html += "<li onclick=\"OpenEvents('" + data[i].Id + "')\"><a href=\"#\" ><span class=\"dot\"></span>" + data[i].Title + "<span class=\"time\">" + time + "</span></a></li>";
+
+                            }
+                            $("#PS_ProjectEvents").html(html);
+                        }
+                    }
+                }
+            })
+            var epsid = getParameter("EpsProjId");
+            if (epsid == "")
+                epsid = "00000000-0000-0000-0000-000000000000";
+            //加载图片
+            $.ajax({
+                url: "/Form/GridPageLoad",
+                data: { KeyWord: 'DocFile', KeyWordType: 'BO', select: '', swhere: " FolderId in (select X1.Id from PS_COM_ProjectEvents X1 where EeventsType = 'P' and EpsProjId='" + epsid + "')", sort: '', index: '0', size: '4' },
+
+                type: 'post',
+                success: function (text) {
+                    var o = jQuery.parseJSON(text);
+                    if (o.success) {
+                        var data = jQuery.parseJSON(o.data.value);
+                        if (data && data.length > 0) {
+                            var html = '';
+                            for (var i = 0; i < data.length; i++) {
+                                html += ' <li><a href="#"><img style="height:155px;width:100%" src="/PowerPlat/Control/File.ashx?action=browser&_type=ftp&_fileid=' + data[i].Id + '"></a></li>';
+
+                            }
+                            $("#pic").html(html);
+
+                            TouchSlide({
+                                slideCell: "#slideBox",
+                                titCell: ".hd1 ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+                                mainCell: ".bd1 ul",
+                                effect: "leftLoop",
+                                autoPage: true,//自动分页
+                                autoPlay: true //自动播放
+                            });
+                        }
+                    }
+                }
+            })
+            if ($("#menu li").length > 0) {
+                TouchSlide({
+                    slideCell: "#slideBox1",
+                    titCell: ".hd2 ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+                    mainCell: ".bd2 ul",
+                    effect: "leftLoop",
+                    autoPage: true,//自动分页
+                    autoPlay: false //自动播放
+                });
+            }
+        });
+        function OpenEvents(id) {
+            var url = "/Apps/Events.html?id=" + id;
+
+            CallAppFunction("appOpenNewWebView", '{"url":"' + url + '","pullUp":"false","pullDown":"true","showTabbar":"true","title":""}', url);
+            //if (window.m3app != undefined && typeof (window.m3app.AppCall) == "function") {
+            //    window.m3app.AppCall('appOpenNewWebView', '{"url":"' + url + '","pullUp":"false","pullDown":"true","showTabbar":"true","title":""}', function XXX(outparam) {
+
+            //    });
+            //}
+            //else {
+            //    window.open(url, "_self")
+            //}
+        }
+    </script>
+    <script type="text/javascript">
+        if ($("#menu li").length > 0) {
+            TouchSlide({
+                slideCell: "#slideBox1",
+                titCell: ".hd2 ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+                mainCell: ".bd2 ul",
+                effect: "leftLoop",
+                autoPage: true,//自动分页
+                autoPlay: false //自动播放
+            });
+        }
+        function openmenu(id, title) {
+            var url = "/WebCenter/MainMenu/" + id;
+            CallAppFunction("appOpenNewWebView", '{"url":"' + url + '","pullUp":"true","pullDown":"true","showTabbar":"true","title":"' + title + '"}', url);
+            //if (window.m3app != undefined && typeof (window.m3app.AppCall) == "function") {
+            //    window.m3app.AppCall('appOpenNewWebView', '{"url":"' + url + '","pullUp":"true","pullDown":"true","showTabbar":"true","title":"' + title + '"}', function XXX(outparam) {
+
+            //    });
+            //}
+            //else {
+            //    window.open(url, "_self")
+            //}
+        }
+        function openchild(id, title) {
+            var url = "/Apps/List.html?id=" + id;
+            CallAppFunction("appOpenNewWebView", '{"url":"' + url + '","pullUp":"false","pullDown":"true","showTabbar":"true","title":""}', url);
+
+            //window.powerm3appcall("appopennewwebview", '{"url":"' + url + '","pullup":"false","pulldown":"true","showtabbar":"true","title":""}',
+            //    function xxx(outparam) {
+            //    aa();
+            //});
+            //if (window.m3app != undefined && typeof (window.m3app.AppCall) == "function") {
+            //    window.m3app.AppCall('appOpenNewWebView', '{"url":"' + url + '","pullUp":"true","pullDown":"true","showTabbar":"true","title":"' + title + '"}', function XXX(outparam) {
+
+            //    });
+            //}
+            //else {
+            //    window.open(url, "_self")
+            //}
+        }
+    </script>
+</body>
+</html>

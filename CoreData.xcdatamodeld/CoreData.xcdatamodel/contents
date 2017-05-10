@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16D32" minimumToolsVersion="Xcode 8.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="GFAudioRecordCoreDataModel" representedClassName="GFAudioRecordCoreDataModel" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fileName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="filePath" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="GFUserInfoCoreDataModel" representedClassName="GFUserInfo" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="portraitUri" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="website" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GFWebsiteCoreDataModel" inverseName="contact" inverseEntity="GFWebsiteCoreDataModel" syncable="YES"/>
+    </entity>
+    <entity name="GFWebsiteCoreDataModel" representedClassName="GFWebsiteCoreDataModel" syncable="YES" codeGenerationType="class">
+        <attribute name="admin" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="epsprojectID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="headImage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="humanID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="loginImage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sessionID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subtitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="contact" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GFUserInfoCoreDataModel" inverseName="website" inverseEntity="GFUserInfoCoreDataModel" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="GFAudioRecordCoreDataModel" positionX="-18" positionY="27" width="128" height="105"/>
+        <element name="GFUserInfoCoreDataModel" positionX="-18" positionY="144" width="128" height="150"/>
+        <element name="GFWebsiteCoreDataModel" positionX="-234" positionY="27" width="128" height="268"/>
+    </elements>
+</model>

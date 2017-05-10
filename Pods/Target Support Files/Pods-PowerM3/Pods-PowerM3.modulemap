@@ -1,0 +1,6 @@
+framework module Pods_PowerM3 {
+  umbrella header "Pods-PowerM3-umbrella.h"
+
+  export *
+  module * { export * }
+}

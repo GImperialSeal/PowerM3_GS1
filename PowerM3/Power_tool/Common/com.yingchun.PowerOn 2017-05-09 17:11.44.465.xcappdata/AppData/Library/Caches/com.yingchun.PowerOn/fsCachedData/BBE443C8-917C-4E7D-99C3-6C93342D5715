@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title></title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="no" />
+    <script src="js/TouchSlide.1.1.js"></script>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="/Scripts/PlatForm/ComTools.js"></script>
+    <script src="/Apps/Common.js"></script>
+
+    <link href="style/style.css" rel="stylesheet" type="text/css" />
+    <link href="style/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        body {
+            background-color: #ebebeb;
+        }
+        .send {
+            border: 1px solid #ddd;
+            margin: 10px;
+            height: 150px;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+            .send h3 {
+                font-size: 1.6rem;
+                margin: 5px 0px;
+                /*margin-left: 15px;
+                border-left: 2px solid #f00;*/
+                padding-left: 10px;
+                color: #07A39B;
+                font-weight:600;
+            }
+            .send h3 i{
+                margin-right:5px;
+            }
+            .send .left {
+                width: 50%;
+                float: left;
+                text-align: center;
+                vertical-align: middle;
+                margin-top: 8px;
+            }
+
+                .send .left span {
+                    display: block; 
+                }
+
+                .send .left .num {
+                    font-size: 4.5rem;
+                    color: #f00;
+                }
+
+                .send .left .solve {
+                    font-size: 1.6rem;
+                    color: #000;
+                }
+
+            .send .right {
+                width: 50%;
+                float: left;
+                text-align: center;
+                margin: 10px 0px;
+            }
+
+                .send .right a {
+                    display: block;
+                    line-height: 30px;
+                    width: 80px;
+                    border: 1px solid #ddd;
+                    margin: 7px 30px;
+                    background-color: #f4f4f4;
+                    font-size: 1.4rem;
+                }
+
+                    .send .right a span {
+                        padding-left: 5px;
+                        color: #f00;
+                    }
+
+                    .send .right a .b {
+                        color: green;
+                    }
+        .files {
+            background-color: #ebebeb;
+            padding-top:5px;
+        }
+        .files li {
+            /*border-bottom: 1px dotted #000;*/
+            line-height: 30px;
+            font-size: 1.4rem;
+            padding-left: 15px;
+            margin-bottom: 5px;
+            background-color: #fff; 
+        }
+    </style>
+
+</head>
+<body>
+    <div class="send">
+        <h3><i class="fa fa-tasks"></i>审批情况</h3>
+        <div class="left">
+            <a href="javascript:;" onclick="OpenWFNotify('MyWorkInfos', 'infos','待审批列表')"><span class="num" id="myinfos_wf">0</span><span class="solve">待处理</span></a>
+        </div>
+        <div class="right">
+            <a href="javascript:;" onclick="OpenWFNotify('MyWorkInfos', 'actived','我发起的流程')">我发起<span id="myactive_wf">0</span></a>
+            <a href="javascript:;" onclick="OpenWFNotify('MyWorkInfos', 'join','我参与的流程')">我参与<span class="b" id="myjoins_wf">0</span></a>
+        </div>
+    </div>
+    <div class="send">
+        <h3><i class="fa fa-bell-o"></i>我的消息</h3>
+        <div class="left">
+            <a href="javascript:;" onclick="OpenWFNotify('MyNotifyInfos', 'infos','未读消息')"><span class="num" id="myinfos_notify">0</span><span class="solve">未读</span></a>
+        </div>
+        <div class="right">
+            <a href="javascript:;" onclick="OpenWFNotify('MyNotifyInfos', 'actived','我发起的消息')">我发起<span id="myactive_notify">0</span></a>
+            <a hrefhref="javascript:;" onclick="OpenWFNotify('MyNotifyInfos', 'join','已读消息')">已读<span class="b" id="myjoins_notify">0</span></a>
+        </div>
+    </div>
+    <div class="send" style="height:100%">
+        <h3><i class="fa fa-file-o"></i>我的文档</h3>
+        <ul class="files" id="files"></ul>
+    </div>
+</body>
+<script type="text/javascript">
+    var DataP = {};
+    var humanid = "";
+    $(function () {
+        humanid = getParameter("HumanId");
+        if (humanid == "") {
+            alert("没有传入用户Id");
+            return;
+        }
+        //获取审批情况
+        $.ajax({
+            url: "/WorkFlow/MyWorkInfos ",
+            type: "POST",
+            data: { types: "infos,actived,join", index: "0", size: "8", swhere: "" },
+            cacha: false,
+            success: function (text) {
+                var o = jQuery.parseJSON(text);
+                $("#myinfos_wf").html(o.data.infostotalcount);
+                $("#myactive_wf").html(o.data.activedtotalcount);
+                $("#myjoins_wf").html(o.data.jointotalcount);
+            }
+        });
+
+        //获取通知公告
+        $.ajax({
+            url: "/Message/MyNotifyInfos",
+            type: "POST",
+            data: { types: "infos,actived,join", index: "0", size: "8", swhere: "" },
+            cacha: false,
+            success: function (text) {
+                var o = jQuery.parseJSON(text);
+                $("#myinfos_notify").html(o.data.infostotalcount);
+                $("#myactive_notify").html(o.data.activedtotalcount);
+                $("#myjoins_notify").html(o.data.jointotalcount);
+                //myinfoshtml(tmpdata.data.infos);
+                //myactivehtml(tmpdata.data.actived);
+                //myjoinhtml(tmpdata.data.join);
+            }
+        });
+        //获取我的文档
+        LoadData({ size: "10", index: "0" });
+    })
+    function LoadData(dataparams) {
+        dataparams.size = "10";
+        dataparams.index = "0";
+        DataP = dataparams;
+        PowerM3AppCallBack.loadpage = doLoadData;
+
+        doLoadData(dataparams);
+    }
+    function doLoadData(dataparams) {
+        dataparams = dataparams || DataP;
+        var p = {
+            KeyWord: 'DocFile', KeyWordType: 'BO', select: 'Id,Name,FileExt,UpdDate',
+            swhere: '', sort: 'UpdDate desc', index: dataparams.index, size: dataparams.size
+        };
+        p.swhere = "RegHumId = '" + humanid + "'";
+        $.ajax({
+            url: "/Form/GridPageLoad",
+            data: p,
+            type: 'post',
+            success: function (text) {
+                var o = jQuery.parseJSON(text);
+                if (o.success) {
+                    var data = jQuery.parseJSON(o.data.value);
+                    BuildHTML(data);
+                }
+            }
+        })
+    }
+    function OpenWFNotify(url, types,title) {
+        var url = "/Apps/PersonalCenterList.html?wfnotify=" + url + "&types=" + types;
+        CallAppFunction("appOpenNewWebView", '{"url":"' + url + '","pullUp":"true","pullDown":"true","showTabbar":"true","title":"' + title + '"}',url);
+        //if (window.m3app != undefined && typeof (window.m3app.AppCall) == "function") {
+        //    window.m3app.AppCall('appOpenNewWebView', '{"url":"' + url + '","pullUp":"true","pullDown":"true","showTabbar":"true","title":"'+title+'"}', function XXX(outparam) {
+
+        //    });
+        //}
+        //else {
+        //    window.open(url, "_self")
+        //}
+    }
+    function OpenFile(id) {
+        var url = "/PowerPlat/FormXml/FileViewer.aspx?online=1&fileid=" + id;
+        CallAppFunction("appOpenNewWebView", '{"url":"' + url + '","pullUp":"false","pullDown":"false","showTabbar":"false","title":""}', url);
+        //if (window.m3app != undefined && typeof (window.m3app.AppCall) == "function") {
+        //    window.m3app.AppCall('appOpenNewWebView', '{"url":"' + url + '","pullUp":"false","pullDown":"false","showTabbar":"false","title":""}', function XXX(outparam) {
+
+        //    });
+        //}
+        //else {
+        //    window.open(url, "_self")
+        //}
+    }
+    function BuildHTML(data) {
+        var html = "";
+
+        for (var j = 0; j < data.length; j++) {
+            var row = data[j];
+            html += '<li onclick="OpenFile(\'' + row.Id + '\')">' + row.Name + row.FileExt + '</li>';
+        }
+        $("#files").append(html);
+
+        if (data.length > 0)
+            DataP.index = parseInt(DataP.index) + 1;
+
+    }
+    var PowerM3AppCallBack = PowerM3AppCallBack || {};
+    PowerM3AppCallBack.pagepullup = function () {
+        //Power.ui.success("上拉触发成功");
+        //alert(typeof (loadpage));
+        PowerM3AppCallBack.loadpage(null, null);
+    }
+    PowerM3AppCallBack.loadpage = function () {
+    }
+
+</script>
+</html>

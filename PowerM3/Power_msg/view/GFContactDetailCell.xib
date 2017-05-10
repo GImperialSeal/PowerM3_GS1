@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="KGk-i7-Jjw" customClass="GFContactDetailCell">
+            <rect key="frame" x="0.0" y="0.0" width="329" height="65"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="329" height="64"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qh2-VN-EiY">
+                        <rect key="frame" x="23" y="22" width="60" height="20.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="FKt-g0-ypm"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RWC-GI-ETB">
+                        <rect key="frame" x="91" y="22" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Qh2-VN-EiY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="SAh-MS-QW4"/>
+                    <constraint firstItem="RWC-GI-ETB" firstAttribute="centerY" secondItem="Qh2-VN-EiY" secondAttribute="centerY" id="WHl-JV-4uh"/>
+                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="RWC-GI-ETB" secondAttribute="trailing" constant="8" id="aeE-pQ-aib"/>
+                    <constraint firstItem="Qh2-VN-EiY" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="fec-C5-B4J"/>
+                    <constraint firstItem="RWC-GI-ETB" firstAttribute="leading" secondItem="Qh2-VN-EiY" secondAttribute="trailing" constant="8" id="mYc-xM-WCZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="leftLabel" destination="Qh2-VN-EiY" id="6if-o7-Qxc"/>
+                <outlet property="titleLabel" destination="RWC-GI-ETB" id="WBV-im-6dd"/>
+            </connections>
+            <point key="canvasLocation" x="-26.5" y="21.5"/>
+        </tableViewCell>
+    </objects>
+</document>
