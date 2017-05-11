@@ -54,25 +54,7 @@
             
             if (buttonIndex == 2) {
                
-                if( [MFMessageComposeViewController canSendText] ){
-                    MFMessageComposeViewController *vc = [[MFMessageComposeViewController alloc]init];
-                    //设置短信内容
-                    //vc.body = @"吃饭了没";
-                    //设置收件人列表
-                    vc.recipients = @[item.subtitle];
-                    //设置代理
-                    vc.messageComposeDelegate = self;
-                    //显示控制器
-                    [weakself presentViewController:vc animated:YES completion:nil];
-                }else{
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示信息"
-                                                                    message:@"该设备不支持短信功能"
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"确定"
-                                                          otherButtonTitles:nil, nil];
-                    [alert show];
-                }
-               
+                [self sendMssageToPhone:item.subtitle ];
             }
             
         }];
@@ -87,29 +69,7 @@
         
         [GFActionSheet ActionSheetWithTitle:@"" buttonTitles:@[] cancelButtonTitle:@"取消" completionBlock:^(NSUInteger buttonIndex) {
             if (buttonIndex == 1) {
-                if(![MFMailComposeViewController canSendMail]){
-                    
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示信息"
-                                                                    message:@"该设备不支持邮箱功能,或者邮箱没有绑定用户"
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"确定"
-                                                          otherButtonTitles:nil, nil];
-                    [alert show];
-                }else{
-                    MFMailComposeViewController *vc = [[MFMailComposeViewController alloc] init];
-                    //设置邮件主题
-                    [vc setSubject:@"邮件"];
-                    //设置邮件内容
-                    //[vc setMessageBody:@"开会" isHTML:NO];
-                    //设置收件人列表
-                    [vc setToRecipients:@[item.subtitle]];
-                    //设置抄送人列表
-                    //[vc setCcRecipients:@[@"test1@qq.com"]];
-                    //设置代理
-                    vc.mailComposeDelegate = self;
-                    //显示控制器
-                    [weakself presentViewController:vc animated:YES completion:nil];
-                }
+                [weakself sendEmailToEmail:item.subtitle];
             }
         }];
     };
@@ -144,6 +104,60 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - send msg
+
+- (void)sendMssageToPhone:(NSString *)phone{
+    if( [MFMessageComposeViewController canSendText] ){
+        MFMessageComposeViewController *vc = [[MFMessageComposeViewController alloc]init];
+        //设置短信内容
+        //vc.body = @"吃饭了没";
+        //设置收件人列表
+        vc.recipients = @[phone];
+        //设置代理
+        vc.messageComposeDelegate = self;
+        //显示控制器
+        [self presentViewController:vc animated:YES completion:nil];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示信息"
+                                                        message:@"该设备不支持短信功能"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
+
+}
+
+#pragma mark - send Eamil
+
+- (void)sendEmailToEmail:(NSString *)email{
+    if(![MFMailComposeViewController canSendMail]){
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示信息"
+                                                        message:@"该设备不支持邮箱功能,或者邮箱没有绑定用户"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+    }else{
+        MFMailComposeViewController *vc = [[MFMailComposeViewController alloc] init];
+        //设置邮件主题
+        [vc setSubject:@"邮件"];
+        //设置邮件内容
+        //[vc setMessageBody:@"开会" isHTML:NO];
+        //设置收件人列表
+        [vc setToRecipients:@[email]];
+        //设置抄送人列表
+        //[vc setCcRecipients:@[@"test1@qq.com"]];
+        //设置代理
+        vc.mailComposeDelegate = self;
+        //显示控制器
+        [self presentViewController:vc animated:YES completion:nil];
+    }
+
 }
 
 #pragma mark - delegate
