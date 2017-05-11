@@ -9,7 +9,9 @@
 #import "GFConversationDetailController.h"
 #import "GFRCloudHelper.h"
 #import "GFConversationViewController.h"
-@interface GFConversationDetailController ()
+#import "GFActionSheet.h"
+@import MessageUI;
+@interface GFConversationDetailController ()<MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
 
 @end
 
@@ -35,20 +37,84 @@
         job  = strArr[1];
         company = strArr.lastObject;
     }
+    __weak typeof(self)weakself = self;
+
    
     ZFSettingItem *head  = [ZFSettingItem itemWithHeadImage:rcInfo.portraitUri title:nickName subtitle:job];
     
     ZFSettingItem *phone = [ZFSettingItem itemWithTitle:@"手机" subtitle:rcInfo.phone];
     phone.type = ZFSettingItemTypeNone;
+    phone.operation = ^(ZFSettingItem *item) {
+        
+        [GFActionSheet ActionSheetWithTitle:@"" buttonTitles:@[@"拨号",@"短信"] cancelButtonTitle:@"取消" completionBlock:^(NSUInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",item.subtitle]];
+                [[UIApplication sharedApplication] openURL:url];
+            }
+            
+            if (buttonIndex == 2) {
+               
+                if( [MFMessageComposeViewController canSendText] ){
+                    MFMessageComposeViewController *vc = [[MFMessageComposeViewController alloc]init];
+                    //设置短信内容
+                    //vc.body = @"吃饭了没";
+                    //设置收件人列表
+                    vc.recipients = @[item.subtitle];
+                    //设置代理
+                    vc.messageComposeDelegate = self;
+                    //显示控制器
+                    [weakself presentViewController:vc animated:YES completion:nil];
+                }else{
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示信息"
+                                                                    message:@"该设备不支持短信功能"
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"确定"
+                                                          otherButtonTitles:nil, nil];
+                    [alert show];
+                }
+               
+            }
+            
+        }];
+    };
     
     ZFSettingItem *user  = [ZFSettingItem itemWithTitle:@"公司" subtitle:company];
     user.type = ZFSettingItemTypeNone;
     
     ZFSettingItem *email = [ZFSettingItem itemWithTitle:@"邮箱" subtitle:rcInfo.email];
     email.type = ZFSettingItemTypeNone;
+    email.operation = ^(ZFSettingItem *item) {
+        
+        [GFActionSheet ActionSheetWithTitle:@"" buttonTitles:@[] cancelButtonTitle:@"取消" completionBlock:^(NSUInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                if(![MFMailComposeViewController canSendMail]){
+                    
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示信息"
+                                                                    message:@"该设备不支持邮箱功能,或者邮箱没有绑定用户"
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"确定"
+                                                          otherButtonTitles:nil, nil];
+                    [alert show];
+                }else{
+                    MFMailComposeViewController *vc = [[MFMailComposeViewController alloc] init];
+                    //设置邮件主题
+                    [vc setSubject:@"邮件"];
+                    //设置邮件内容
+                    //[vc setMessageBody:@"开会" isHTML:NO];
+                    //设置收件人列表
+                    [vc setToRecipients:@[item.subtitle]];
+                    //设置抄送人列表
+                    //[vc setCcRecipients:@[@"test1@qq.com"]];
+                    //设置代理
+                    vc.mailComposeDelegate = self;
+                    //显示控制器
+                    [weakself presentViewController:vc animated:YES completion:nil];
+                }
+            }
+        }];
+    };
     
     ZFSettingItem *msg   = [ZFSettingItem itemWithTitle:@"发送消息" type:ZFSettingItemTypeSignout];
-    __weak typeof(self)weakself = self;
     msg.operation = ^(ZFSettingItem *item) {
         
         UIViewController *rootVC = weakself.navigationController.viewControllers[0];
@@ -80,8 +146,40 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - delegate
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+    switch (result) {
+        case MessageComposeResultSent:
+            [MBProgressHUD showSuccess:@"发送成功" toView:self.view];
 
+            break;
+        case MessageComposeResultFailed:
+            [MBProgressHUD showError:@"发送失败" toView:self.view];
 
+            break;
+            
+        default:
+            break;
+    }
+    
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+    
+    switch (result) {
+        case MFMailComposeResultFailed:
+            [MBProgressHUD showError:@"发送失败" toView:self.view];
+            break;
+        case MFMailComposeResultSent:
+            [MBProgressHUD showSuccess:@"发送成功" toView:self.view];
+            break;
+            
+        default:
+            break;
+    }
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 

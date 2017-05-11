@@ -28,6 +28,11 @@ PODS:
   - NJKWebViewProgress/Core (0.2.3)
   - NJKWebViewProgress/ProgressView (0.2.3)
   - PureLayout (3.0.2)
+  - RongCloudIM/CallKit (2.8.6):
+    - RongCloudIM/CallLib
+    - RongCloudIM/IMKit
+  - RongCloudIM/CallLib (2.8.6):
+    - RongCloudIM/IMLib
   - RongCloudIM/IMKit (2.8.6):
     - RongCloudIM/IMLib
   - RongCloudIM/IMLib (2.8.6)
@@ -46,8 +51,10 @@ DEPENDENCIES:
   - MJRefresh (~> 3.1.12)
   - NJKWebViewProgress (~> 0.2.3)
   - PureLayout (~> 3.0.2)
-  - RongCloudIM/IMKit (~> 2.8.3)
-  - RongCloudIM/IMLib (~> 2.8.3)
+  - RongCloudIM/CallKit
+  - RongCloudIM/CallLib
+  - RongCloudIM/IMKit
+  - RongCloudIM/IMLib
   - TZImagePickerController
   - UITableView+FDTemplateLayoutCell (~> 1.5.beta)
   - ZipArchive (~> 1.4.0)
@@ -69,6 +76,6 @@ SPEC CHECKSUMS:
   ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
   ZYCornerRadius: f0af817be7805b5c63d793042ca7a03f81e14069
 
-PODFILE CHECKSUM: 5d25dff59bc410e9a47fea60ed00335d0d81829b
+PODFILE CHECKSUM: 64ff02789e3b5775fc3060f7bf72a77ea6b6b5ac
 
 COCOAPODS: 1.2.0.rc.1

@@ -304,8 +304,8 @@
 /*!
  当showConnectingStatusOnNavigatorBar设置为YES时，连接状态变化时更新NavigationBar的回调（已废弃，请勿使用）
 
+ @discussion SDK在此方法中有默认的处理，如果您在子类中需要重写此方法，请注意调用super。
 
- 
  @warning **已废弃，请勿使用。**
  */
 - (void)updateConnectionStatusOnNavigatorBar __deprecated_msg("已废弃，请勿使用。");

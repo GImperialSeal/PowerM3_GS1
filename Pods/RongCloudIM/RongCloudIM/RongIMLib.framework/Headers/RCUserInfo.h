@@ -32,7 +32,6 @@
  */
 @property(nonatomic, strong) NSString *portraitUri;
 
-
 /*!
  用户信息的初始化方法
 

@@ -14,7 +14,7 @@
  @const 收到消息的Notification
  
  @discussion 接收到消息后，SDK会分发此通知。
-
+ 
  Notification的object为RCMessage消息对象。
  userInfo为NSDictionary对象，其中key值为@"left"，value为还剩余未接收的消息数的NSNumber对象。
  

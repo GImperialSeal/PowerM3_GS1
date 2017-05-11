@@ -13,8 +13,10 @@ target ‘PowerM3’ do
   pod 'AFNetworking', '~> 3.0'
   pod 'TZImagePickerController'
   pod 'JPush', '~> 2.1.9'
-  pod 'RongCloudIM/IMLib', '~> 2.8.3'
-  pod 'RongCloudIM/IMKit', '~> 2.8.3'
+  pod 'RongCloudIM/IMLib'
+  pod 'RongCloudIM/IMKit'
+  pod 'RongCloudIM/CallLib'
+  pod 'RongCloudIM/CallKit'
   pod "DXPopover"
   pod 'FDFullscreenPopGesture', '1.1'
 
