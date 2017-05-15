@@ -84,7 +84,6 @@ static EMAudioPlayerUtil *audioPlayerUtil = nil;
             playFinish(error);
         }
         playFinish = nil;
-        
         return;
     }
     

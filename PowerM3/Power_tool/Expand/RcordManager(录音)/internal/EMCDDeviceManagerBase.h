@@ -15,8 +15,6 @@
 
 @interface EMCDDeviceManager : NSObject{
     // recorder
-    NSDate              *_recorderStartDate;
-    NSDate              *_recorderEndDate;
     NSString            *_currCategory;
     BOOL                _currActive;
 

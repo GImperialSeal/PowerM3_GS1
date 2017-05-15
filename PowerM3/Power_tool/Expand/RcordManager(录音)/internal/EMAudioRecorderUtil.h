@@ -11,21 +11,51 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <AVFoundation/AVFoundation.h>
+@import AVFoundation;
+
+
+/**
+ 录音完成的回调
+ @param path 录音路径
+ @param duration 录音时长
+ */
+typedef void (^recordCompletion)(NSString *path,CGFloat duration);
+
+/**
+ 录音 音量
+ @param progress 音量
+ @param duration 转换为秒 (1.0 * duration/10)
+ */
+typedef void (^audioPowerChange)(CGFloat progress,NSInteger duration);
+
 @interface EMAudioRecorderUtil : NSObject
 
+// 音量值变化
+@property (nonatomic, copy) audioPowerChange audioPower;
+
+
+// 单利
++ (instancetype)record;
+
 // 当前是否正在录音
-+(BOOL)isRecording;
+- (BOOL)isRecording;
 
 // 开始录音
-+ (void)asyncStartRecordingWithPreparePath:(NSString *)aFilePath
-                                completion:(void(^)(NSError *error))completion;
+- (void)start;
+
 // 停止录音
-+(void)asyncStopRecordingWithCompletion:(void(^)(NSString *recordPath))completion;
+- (void)stop:(recordCompletion)complete;
+
+// 暂停
+- (void)pause;
+
+// 继续
+-(void)resume;
 
 // 取消录音
-+(void)cancelCurrentRecording;
+- (void)cancle;
 
-// current recorder
-+(AVAudioRecorder *)recorder;
+// 可以在录音暂停的时候, 播放/暂停 录制的声音
+- (void)audioPlayOrPause;
+
 @end

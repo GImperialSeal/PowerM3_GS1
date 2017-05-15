@@ -13,7 +13,7 @@
         <!--录制-->
         <scene sceneID="krR-58-HNi">
             <objects>
-                <viewController id="Ygg-A9-eKo" customClass="GFVoiceRecordViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GFVoiceRecordViewController" id="Ygg-A9-eKo" customClass="GFVoiceRecordViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r7u-9t-vmf"/>
                         <viewControllerLayoutGuide type="bottom" id="Sar-VF-JZY"/>
@@ -43,8 +43,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xlg-to-9T3">
-                                <rect key="frame" x="16" y="179" width="70" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xlg-to-9T3">
+                                <rect key="frame" x="16" y="179" width="46" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -87,9 +87,6 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1a-gV-ljh">
                                                     <rect key="frame" x="293" y="20" width="31" height="30"/>
                                                     <state key="normal" title="播放"/>
-                                                    <connections>
-                                                        <action selector="playRecord" destination="Ahb-St-ciw" eventType="touchUpInside" id="ASq-74-lss"/>
-                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7x1-ro-3B8">
                                                     <rect key="frame" x="336" y="20" width="31" height="30"/>
@@ -124,10 +121,10 @@
                                     <outlet property="delegate" destination="Ygg-A9-eKo" id="zi2-j5-V76"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aEe-fC-Kwh">
+                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aEe-fC-Kwh">
                                 <rect key="frame" x="171.5" y="268" width="32" height="32"/>
                                 <state key="normal" backgroundImage="icon_start_record"/>
-                                <state key="selected" backgroundImage="icon_start_record"/>
+                                <state key="selected" backgroundImage="icon_pause_record"/>
                                 <connections>
                                     <action selector="startRecordOrPauseRecord:" destination="Ygg-A9-eKo" eventType="touchUpInside" id="E4P-SK-BoK"/>
                                 </connections>
@@ -137,8 +134,23 @@
                                 <state key="normal" title="完成">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="stopRecorder" destination="Ygg-A9-eKo" eventType="touchUpInside" id="xCH-JV-8Wg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIC-Jt-0LX">
+                                <rect key="frame" x="111" y="269" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="05d-wR-kXt"/>
+                                    <constraint firstAttribute="width" constant="30" id="maN-eb-dos"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="icon_play_record"/>
+                                <state key="selected" backgroundImage="icon_play_pause"/>
+                                <connections>
+                                    <action selector="playRecorder" destination="Ygg-A9-eKo" eventType="touchUpInside" id="Ggp-LJ-5cd"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -157,8 +169,10 @@
                             <constraint firstItem="eQw-a2-wUZ" firstAttribute="leading" secondItem="Xlg-to-9T3" secondAttribute="leading" id="Nc6-z2-TVY"/>
                             <constraint firstItem="HqF-ZS-qAT" firstAttribute="leading" secondItem="qaN-Il-NYQ" secondAttribute="trailing" constant="8" id="Pbv-v1-gBA"/>
                             <constraint firstItem="aEe-fC-Kwh" firstAttribute="centerX" secondItem="nr9-J5-lvH" secondAttribute="centerX" id="RaD-JK-fOs"/>
+                            <constraint firstItem="aEe-fC-Kwh" firstAttribute="leading" secondItem="GIC-Jt-0LX" secondAttribute="trailing" constant="30.5" id="Vaw-YP-c5m"/>
                             <constraint firstItem="HqF-ZS-qAT" firstAttribute="top" secondItem="r7u-9t-vmf" secondAttribute="bottom" constant="72" id="hJT-KH-gAe"/>
                             <constraint firstItem="aJK-c1-ecb" firstAttribute="leading" secondItem="aEe-fC-Kwh" secondAttribute="trailing" constant="29" id="juk-ir-3lD"/>
+                            <constraint firstItem="GIC-Jt-0LX" firstAttribute="centerY" secondItem="aEe-fC-Kwh" secondAttribute="centerY" id="krK-pU-vUf"/>
                             <constraint firstItem="FGz-Cc-tgh" firstAttribute="leading" secondItem="HqF-ZS-qAT" secondAttribute="trailing" constant="8" id="lkT-pX-j4F"/>
                             <constraint firstItem="HqF-ZS-qAT" firstAttribute="centerX" secondItem="nr9-J5-lvH" secondAttribute="centerX" id="qzF-sR-GVZ"/>
                             <constraint firstItem="Xlg-to-9T3" firstAttribute="top" secondItem="qaN-Il-NYQ" secondAttribute="bottom" constant="8" id="sNM-pF-Y7V"/>
@@ -170,6 +184,9 @@
                     <connections>
                         <outlet property="dateLabel" destination="JPR-or-fVg" id="IHM-nv-m9z"/>
                         <outlet property="durationLabel" destination="Xlg-to-9T3" id="cie-jx-dbl"/>
+                        <outlet property="finishedButton" destination="aJK-c1-ecb" id="444-pj-v4l"/>
+                        <outlet property="playerButton" destination="GIC-Jt-0LX" id="Pru-g3-6vD"/>
+                        <outlet property="recordButton" destination="aEe-fC-Kwh" id="Bza-Nk-FPS"/>
                         <outlet property="recordNameLabel" destination="eQw-a2-wUZ" id="ftQ-ke-NkC"/>
                         <outlet property="tableView" destination="NU1-4t-4fO" id="ttT-Pz-L4V"/>
                         <outlet property="volumeImageView" destination="FGz-Cc-tgh" id="bgq-4d-v6N"/>
@@ -902,7 +919,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选取联系人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ROR-TO-3hm">
-                                        <rect key="frame" x="146" y="27" width="85" height="24"/>
+                                        <rect key="frame" x="145" y="27" width="85" height="24"/>
                                         <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="17"/>
                                         <color key="textColor" red="0.31157338620000002" green="0.66366493699999995" blue="0.62158799170000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -974,6 +991,9 @@
         <image name="add" width="150" height="150"/>
         <image name="company_logo" width="100" height="78"/>
         <image name="icon_checked" width="32" height="32"/>
+        <image name="icon_pause_record" width="32" height="32"/>
+        <image name="icon_play_pause" width="32" height="32"/>
+        <image name="icon_play_record" width="32" height="32"/>
         <image name="icon_start_record" width="32" height="32"/>
         <image name="icon_unCheck" width="32" height="32"/>
         <image name="login_bg" width="750" height="1334"/>

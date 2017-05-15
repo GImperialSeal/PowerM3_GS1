@@ -26,22 +26,6 @@
 // 当前是否正在播放
 -(BOOL)isPlaying;
 
-#pragma mark - AudioRecorder
-// 开始录音
-- (void)asyncStartRecordingWithFileName:(NSString *)fileName
-                                completion:(void(^)(NSError *error))completion;
-// 暂停
-- (void)pauseCurrentRecording;
 
-// 停止录音
--(void)asyncStopRecordingWithCompletion:(void(^)(NSString *recordPath,
-                                                 NSInteger aDuration,
-                                                 NSError *error))completion;
-// 取消录音
--(void)cancelCurrentRecording;
-
-
-// 当前是否正在录音
--(BOOL)isRecording;
 
 @end

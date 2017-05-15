@@ -43,7 +43,6 @@
     self.websiteTextField.placeholder = @"web service address";
     //_websiteTextField.text = @"192.168.0.47:8088";
     
-    
   }
 
 #pragma mark - click 方法   __  go 登录页面
@@ -98,5 +97,7 @@
     }
     return YES;
 }
+
+
 
 @end

@@ -26,9 +26,9 @@
     // 刷新角标
     [[GFRCloudHelper shareInstace] refreshBadgeValue];
     
+    // 设置UI
     if (self.conversationType == ConversationType_DISCUSSION) {
         NSString *nicknameKey = [NSString stringWithFormat:@"%@_SHOW_DISCUSSION_NICKNAME_KEY",self.targetId];
-        
         
         self.displayUserNameInCell = [GFUserDefault boolForKey:nicknameKey];
 
@@ -50,8 +50,6 @@
     }
     
 }
-
-
 
 #pragma mark - click func
 

@@ -29,17 +29,17 @@
     return ret;
 }
 
-// 获取录制音频时的音量(0~1)
-- (double)emPeekRecorderVoiceMeter{
-    double ret = 0.0;
-    if ([EMAudioRecorderUtil recorder].isRecording) {
-        [[EMAudioRecorderUtil recorder] updateMeters];
-        //获取音量的平均值  [recorder averagePowerForChannel:0];
-        //音量的最大值  [recorder peakPowerForChannel:0];
-        double lowPassResults = pow(10, (0.05 * [[EMAudioRecorderUtil recorder] peakPowerForChannel:0]));
-        ret = lowPassResults;
-    }
-    
-    return ret;
-}
+//// 获取录制音频时的音量(0~1)
+//- (double)emPeekRecorderVoiceMeter{
+//    double ret = 0.0;
+//    if ([EMAudioRecorderUtil recorder].isRecording) {
+//        [[EMAudioRecorderUtil recorder] updateMeters];
+//        //获取音量的平均值  [recorder averagePowerForChannel:0];
+//        //音量的最大值  [recorder peakPowerForChannel:0];
+//        double lowPassResults = pow(10, (0.05 * [[EMAudioRecorderUtil recorder] peakPowerForChannel:0]));
+//        ret = lowPassResults;
+//    }
+//    
+//    return ret;
+//}
 @end

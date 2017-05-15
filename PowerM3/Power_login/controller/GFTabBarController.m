@@ -194,7 +194,9 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
         }else if(i == buttonItems.count-2){
             controller = [[GFConversationListViewController alloc]init];
         }else{
-            controller = [[GFSettingViewController alloc]init];
+            
+            controller = MAINSTORYBOARD(@"GFVoiceRecordViewController");
+            //controller = [[GFSettingViewController alloc]init];
         }
         controller.navigationItem.title = model.title;
         

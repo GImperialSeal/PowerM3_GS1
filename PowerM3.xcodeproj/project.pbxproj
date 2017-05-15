@@ -1308,6 +1308,9 @@
 							com.apple.Push = {
 								enabled = 1;
 							};
+							com.apple.VPNLite = {
+								enabled = 0;
+							};
 						};
 					};
 					F92330911DF26C9A005EB47E = {
