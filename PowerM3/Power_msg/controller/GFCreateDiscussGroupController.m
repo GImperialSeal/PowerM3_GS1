@@ -11,6 +11,7 @@
 #import "GFTextField.h"
 #import "GFRCloudHelper.h"
 #import "GFConversationViewController.h"
+#import "GFUserInfoCoreDataModel+CoreDataProperties.h"
 
 @interface GFCreateDiscussGroupController ()<UICollectionViewDataSource,UICollectionViewDelegate,UITextFieldDelegate,GFTextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -46,7 +47,7 @@ static  NSDictionary *mark_SourceDictionary;
 
     self.titleLabel.text = self.title;
     
-    [_collectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+    [_collectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:@"id"];
     
     _textField.deleteBackwordDelegate = self;
     // 监听textfield 的输入
@@ -115,9 +116,9 @@ static  NSDictionary *mark_SourceDictionary;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    CollectionViewCell *cell = (CollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    CollectionViewCell *cell = (CollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"id" forIndexPath:indexPath];
     UIImageView *imageView = [cell viewWithTag:303];
-    RCUserInfo *p = [[GFRCloudHelper shareInstace] currentUserInfoWithUserId:_collectSourceArray[indexPath.row]];
+    GFUserInfoCoreDataModel *p = [GFUserInfoCoreDataModel findUserByUserId:_collectSourceArray[indexPath.row]];
     [imageView gf_loadImagesWithURL:p.portraitUri];
     return cell;
 }

@@ -55,7 +55,7 @@
 #pragma mark - WKNavigationDelegate
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
-    __weak typeof (self)weakSelf = self;
+    //__weak typeof (self)weakSelf = self;
     
    
     

@@ -13,6 +13,8 @@
 
 + (void)login:(NSString *)username code:(NSString *)password completion:(void(^)(LoginSuccessedDataSource *obj))complete failure:(void(^)(NSError *error))fail;
 
++ (void)replaceRootWindowWithOptions:(BOOL)login;
+
 // 验证sessionID
 + (void)validateCookieSessionidCompletion:(dispatch_block_t)completion;
 

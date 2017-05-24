@@ -30,9 +30,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     _searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
     _searchController.searchResultsUpdater = self;
-    
     _searchController.searchBar.tintColor = [UIColor blackColor];
-    
     self.definesPresentationContext = YES;
     [self.tableView setTableHeaderView:_searchController.searchBar];
 

@@ -18,6 +18,12 @@
                        UrlString:(NSString *)urlString
                         complete:(dispatch_block_t)complete
                          failure:(dispatch_block_t)fail;
+// 上传音频
+-(void)uploadAudioWithParameters:(NSDictionary *)parameters
+                       VideoPath:(NSString *)videoPath
+                       UrlString:(NSString *)urlString
+                        complete:(dispatch_block_t)complete
+                         failure:(dispatch_block_t)fail;
 
 // 上传图片  图片大小压缩过后不能超过2M,超过2M 图片也要分片上传
 - (void)UploadPicturesWithURL:(NSString *)URL

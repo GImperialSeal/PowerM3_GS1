@@ -17,15 +17,23 @@
 
 @implementation GFSearchResultController
 
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor orangeColor];
+    
     // Do any additional setup after loading the view.
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     self.tableView.rowHeight = 56;
     // self.tableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0);
-    
-    
-    
     self.sourceArray = [NSMutableArray arrayWithCapacity:50];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GFContactsTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];

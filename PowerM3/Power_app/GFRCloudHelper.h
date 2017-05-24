@@ -9,16 +9,20 @@
 #import <Foundation/Foundation.h>
 #import <RongIMKit/RongIMKit.h>
 
-#import "GFRCUserInfo.h"
 @class GFContactModel;
-@interface GFRCloudHelper : NSObject <RCIMUserInfoDataSource,RCIMGroupInfoDataSource,RCIMReceiveMessageDelegate>
+@interface GFRCloudHelper : NSObject <RCIMUserInfoDataSource,RCIMReceiveMessageDelegate>
 
 
 + (instancetype)shareInstace;
 
 
-@property (nonatomic, strong) NSMutableArray *groupsArray;
-@property (nonatomic, strong) NSMutableArray *friendsArray;
+
+/**
+ 1. 初始化融云 设置代理  在接口处调用
+ 2. appkey 在.m文件设置
+ */
+- (void)initRCIMWithOptions:(NSDictionary *)launchOptions;
+
 /**
  *  登录融云服务器（connect，用token去连接）
  *
@@ -30,19 +34,13 @@
 /**
  *  从服务器同步好友列表
  */
-- (void)syncFriendList:(void (^)(NSMutableArray * friends,BOOL isSuccess))completion;
+- (void)syncFriendList:(void (^)(NSArray * friends,BOOL isSuccess))completion;
 
-/**
- *  从服务器同步群组列表
- */
-- (void)syncGroupList:(void (^)(NSMutableArray * groups,BOOL isSuccess))completion;
 
 /**
  *  刷新tabbar的角标
  */
 - (void)refreshBadgeValue;
-
-- (RCUserInfo *)currentUserInfoWithUserId:(NSString *)userId;
 
 
 /**

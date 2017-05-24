@@ -12,7 +12,7 @@
 @import Photos;
 #import "PureLayout.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
-@interface QRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate,UIImagePickerControllerDelegate>
+@interface QRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (nonatomic,strong) UIView *checkbox;//扫描框
 @property (nonatomic,strong) CALayer *checkline;//扫描线
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *previewLayer;//预览图层

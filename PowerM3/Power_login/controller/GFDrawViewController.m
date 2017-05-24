@@ -9,7 +9,7 @@
 #import "GFDrawViewController.h"
 #import "GFTabBarController.h"
 #import "GFMenuViewController.h"
-
+#import "PureLayout.h"
 #define OffX KW-80
 
 @interface GFDrawViewController ()
@@ -28,8 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.rootViewController.view.frame = self.view.frame;
     [self.view addSubview:self.rootViewController.view];
+    [self.rootViewController.view autoPinEdgesToSuperviewEdges];
     [self addChildViewController:_rootViewController];
 }
 
@@ -60,6 +60,7 @@
     _menuViewController.view.frame = CGRectMake(0, 0, OffX, KH);
     _menuViewController.view.backgroundColor = [UIColor whiteColor];
     [self.view insertSubview:_menuViewController.view  atIndex:0];
+    //[_menuViewController.view autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeLeft];
     [self addChildViewController:_menuViewController];
     
     // animate

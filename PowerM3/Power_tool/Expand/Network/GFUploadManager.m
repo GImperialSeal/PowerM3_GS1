@@ -39,7 +39,28 @@ static NSInteger _chunks; // 分片 数量
 static NSString *_url;    // 地址
 static NSString *_path;   // 文件路径
 static NSDictionary *_parameters;
+static NSString *_format; // 文件格式
 
+
+
+
+
+-(void)uploadAudioWithParameters:(NSDictionary *)parameters
+                       VideoPath:(NSString *)videoPath
+                       UrlString:(NSString *)urlString
+                        complete:(dispatch_block_t)complete
+                         failure:(dispatch_block_t)fail{
+    manager = [[AFHTTPSessionManager alloc]initWithBaseURL:[NSURL URLWithString:POWERM3URL]];
+    _length = [[[NSFileManager defaultManager] attributesOfItemAtPath:videoPath error:nil][NSFileSize]integerValue];
+    _url = urlString;
+    _path = videoPath;
+    _parameters = parameters;
+    _offset = 1024*1024;
+    _chunks = _length%_offset == 0 ?_length/_offset  : _length/_offset +1;
+    _retry = 0;
+    _format = @"amr";
+    [self uploadVideoWithChunk:0 completion:complete failure:fail];
+}
 #pragma mark - 视频上传 (单线程)
 -(void)uploadVideoWithParameters:(NSDictionary *)parameters
                        VideoPath:(NSString *)videoPath
@@ -54,6 +75,7 @@ static NSDictionary *_parameters;
     _offset = 1024*1024;
     _chunks = _length%_offset == 0 ?_length/_offset  : _length/_offset +1;
     _retry = 0;
+    _format = @"mp4";
     [self uploadVideoWithChunk:0 completion:complete failure:fail];
 }
 
@@ -85,7 +107,7 @@ static NSDictionary *_parameters;
     NSData *data = [self dataWithChunk:chunk];
     [manager POST:_url parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         //获得沙盒中的视频内容
-        [formData appendPartWithFileData:data name:@"fileData" fileName:[NSString stringWithFormat:@"%@.mp4",[self randomString]] mimeType:@"application/octet-stream"];
+        [formData appendPartWithFileData:data name:@"fileData" fileName:[NSString stringWithFormat:@"%@.%@",[self randomString],_format] mimeType:@"application/octet-stream"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
 
     

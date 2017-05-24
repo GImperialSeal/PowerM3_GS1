@@ -6,7 +6,7 @@
         <attribute name="fileName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="filePath" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="GFUserInfoCoreDataModel" representedClassName="GFUserInfo" syncable="YES" codeGenerationType="class">
+    <entity name="GFUserInfoCoreDataModel" representedClassName="GFUserInfoCoreDataModel" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>

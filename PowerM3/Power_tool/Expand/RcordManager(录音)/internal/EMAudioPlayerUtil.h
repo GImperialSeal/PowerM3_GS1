@@ -12,7 +12,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^playingProgress)(CGFloat progress);
+
+
 @interface EMAudioPlayerUtil : NSObject
+
+
 // 当前是否正在播放
 + (BOOL)isPlaying;
 
@@ -25,5 +30,9 @@
 
 // 停止当前播放音频
 + (void)stopCurrentPlaying;
+
+// 播放的进度
++ (CGFloat)playingProgress;
+
 
 @end

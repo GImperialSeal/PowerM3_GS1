@@ -14,7 +14,7 @@
 #import "GFSearchViewController.h"
 #import "MJRefresh.h"
 #import "GFContactListDelegate.h"
-
+#import "GFUserInfoCoreDataModel+CoreDataProperties.h"
 #import "GFPickerHelper.h"
 #import "GFUploadManager.h"
 
@@ -49,8 +49,6 @@
     [self setUI];
 }
 
-
-
 - (void)back{
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -68,15 +66,12 @@
     _contactDelegate = [[GFContactListDelegate alloc]init];
     _contactDelegate.newsNavigationController = self.navigationController;
 
-    [[GFRCloudHelper shareInstace] syncFriendList:^(NSMutableArray *friends, BOOL isSuccess) {
-        if (isSuccess) [self sortArr:friends];
-        else BLog(@"刷新失败");
-    }];
+    [self sortArr:[GFUserInfoCoreDataModel findAll]];
 
     // 下拉刷新
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
-        [[GFRCloudHelper shareInstace] syncFriendList:^(NSMutableArray *friends, BOOL isSuccess) {
+        [[GFRCloudHelper shareInstace] syncFriendList:^(NSArray *friends, BOOL isSuccess) {
             [self.conversationListTableView.mj_header endRefreshing];
             if (isSuccess) [self sortArr:friends];
             else BLog(@"刷新失败");
@@ -135,11 +130,10 @@
                 // 创建讨论组
                 static NSString *lastName = @"";
                 for (NSString *userId in listArray) {
-                    RCUserInfo *info = [[GFRCloudHelper shareInstace] currentUserInfoWithUserId:userId];
+                    GFUserInfoCoreDataModel *info = [GFUserInfoCoreDataModel findUserByUserId:userId];
                     if (info.name.length) {
                         NSArray *name = [info.name componentsSeparatedByString:@"/"];
                         if (name.count) {
-                            
                             lastName = [lastName stringByAppendingString:[NSString stringWithFormat:@"、 %@",name.firstObject]];
                         }
                     }
@@ -177,7 +171,6 @@
 }
 
 #pragma mark - lazy load
-
 - (void)sortArr:(NSArray *)friends{
     [GFRCloudHelper sortCHWithArray:friends sortedByKey:@"name" completion:^(NSMutableDictionary *dict, NSArray *keys) {
         _contactDelegate.keys = keys;

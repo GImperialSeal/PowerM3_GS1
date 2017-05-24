@@ -29,6 +29,7 @@
 //   获取本地文件内容的大小
 + (NSInteger)fileSizeOfPath:(NSString *)filePath;
 
++ (NSString *)appendFilePath:(NSString *)fileName ;
 
 #pragma mark - * * * * * * * * * * * * * * File Manager * * * * * * * * * * * * * *
 

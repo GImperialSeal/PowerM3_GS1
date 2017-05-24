@@ -11,6 +11,7 @@
 #import "LoginDataSource.h"
 #import "UIActivityIndicatorView+AFNetworking.h"
 #import "NSString+Extension.h"
+#import "AppDelegate.h"
 @import JavaScriptCore;
 
 
@@ -25,6 +26,12 @@
     return model;
 }
 
+
++ (void)replaceRootWindowWithOptions:(BOOL)login{
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [app loginWithNeedLogin:login];
+}
+
 + (void)websiteSetValue:(id)value forKey:(NSString *)key{
     GFWebsiteCoreDataModel *model = [GFWebsiteCoreDataModel MR_findFirstByAttribute:@"url" withValue:POWERM3URL];
     [model setValue:value forKey:key];
@@ -33,7 +40,10 @@
 
 + (void)getUserToken{
     
+    
 }
+
+
 
 + (void)login:(NSString *)username code:(NSString *)password completion:(void(^)(LoginSuccessedDataSource *obj))complete failure:(void(^)(NSError *error))fail{
     
@@ -126,21 +136,15 @@
 
 + (BOOL)lookupWebViewCookieDeleteOrNot:(BOOL)del{
     
-    BLog(@"******************cookies");
 
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     for (NSHTTPCookie *cookie in storage.cookies) {
         
-        BLog(@"******************cookies: %@",cookie);
 
         if ([cookie.name isEqualToString:@"PowerWebCertificate"]) {
             NSComparisonResult result = [[NSDate date] compare:cookie.expiresDate];
-            BLog(@"******************result: %ld",(long)result);
 
-            
-            if (result>0) {
-                
-
+            if (result == NSOrderedAscending) {
                 return YES;
             }
             

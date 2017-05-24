@@ -14,7 +14,7 @@
 #import "GFActionSheet.h"
 #import "GFGroupMemberCollectionCell.h"
 #import "PureLayout.h"
-
+#import "GFUserInfoCoreDataModel+CoreDataProperties.h"
 #import "GFConversationViewController.h"
 
 @interface GFGroupMemberViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
@@ -108,7 +108,6 @@
         }];
     };
     
-    
     // 删除讨论组
     ZFSettingItem *signout  = [ZFSettingItem itemWithTitle:@"删除并退出" type:ZFSettingItemTypeSignout];
     signout.operation = ^(ZFSettingItem *item){
@@ -133,20 +132,10 @@
 }
 
 
-- (RCUserInfo *)getUserWithId:(NSString *)userId{
-    for (RCUserInfo *info in [GFRCloudHelper shareInstace].friendsArray) {
-        
-        if ([info.userId isEqualToString:userId]) {
-            BLog(@"name: %@",info.name);
-            return info;
-        }
-    }
-    return nil;
-}
+
 - (void)setUI{
     
     self.sourceArray = [NSMutableArray arrayWithArray:self.discussion.memberIdList];
-    
     
     UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc]init];
     flow.sectionInset = UIEdgeInsetsMake(8, 20, 8, 20);
@@ -185,11 +174,9 @@
         cell.titleLabel.text = @"";
     }else{
         NSString *userId = self.sourceArray[indexPath.row];
-        RCUserInfo *info = [self getUserWithId:userId];
-        
+        GFUserInfoCoreDataModel *info = [GFUserInfoCoreDataModel findUserByUserId:userId];
         [cell.headImageView gf_loadImagesWithURL:info.portraitUri];
         cell.titleLabel.text = info.name;
-
     }
     
     
@@ -201,7 +188,7 @@
     
     // add
     if (indexPath.row == _sourceArray.count) {
-        [GFRCloudHelper sortCHWithArray:[GFRCloudHelper shareInstace].friendsArray sortedByKey:@"name" completion:^(NSMutableDictionary *dict, NSArray *keys) {
+        [GFRCloudHelper sortCHWithArray:[GFUserInfoCoreDataModel findAll] sortedByKey:@"name" completion:^(NSMutableDictionary *dict, NSArray *keys) {
             GFCreateDiscussGroupController *discussVC =  MAINSTORYBOARD(@"GFCreateDiscussGroupController");
             discussVC.sectionTitlesArray = keys;
             discussVC.sourceDictionary = dict;
@@ -233,7 +220,7 @@
     }else if (indexPath.row == _sourceArray.count+1){
         NSMutableArray *array = [NSMutableArray array];
         for (NSString *userId in self.discussion.memberIdList) {
-            RCUserInfo *info = [[GFRCloudHelper shareInstace] currentUserInfoWithUserId:userId];
+            GFUserInfoCoreDataModel *info = [GFUserInfoCoreDataModel findUserByUserId:userId];
             [array addObject:info];
         }
         

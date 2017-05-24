@@ -54,12 +54,8 @@
 		EEB433251E7BDF680098535C /* UISearchBar+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB433241E7BDF680098535C /* UISearchBar+Extension.m */; };
 		EEC375181EB06FDB0024E04B /* GFDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC375151EB06FDB0024E04B /* GFDownloadManager.m */; };
 		EEC375191EB06FDB0024E04B /* GFImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC375171EB06FDB0024E04B /* GFImageCache.m */; };
-		EED17E1A1E8A34B70034F396 /* timg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EED17E191E8A34B70034F396 /* timg.jpg */; };
-		EED8B7151E8B914A001F022E /* GFCreateChatGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EED8B7141E8B914A001F022E /* GFCreateChatGroupViewController.m */; };
 		EED8B7181E8B9708001F022E /* GFKeyboardHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EED8B7171E8B9708001F022E /* GFKeyboardHelper.m */; };
 		EED8B71E1E8B9853001F022E /* GFBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EED8B71D1E8B9853001F022E /* GFBaseViewController.m */; };
-		EEDB74151E8CEA5400C585C0 /* GFGroupListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDB74141E8CEA5400C585C0 /* GFGroupListViewController.m */; };
-		EEDC5A721EBABB6300367AC7 /* GFRCUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC5A711EBABB6300367AC7 /* GFRCUserInfo.m */; };
 		EEE078A31E88FDA800587485 /* qrcode_scan_btn_flash_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEE0789C1E88FDA800587485 /* qrcode_scan_btn_flash_nor@2x.png */; };
 		EEE078A41E88FDA800587485 /* qrcode_scan_btn_photo_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEE0789D1E88FDA800587485 /* qrcode_scan_btn_photo_nor@2x.png */; };
 		EEE078A51E88FDA800587485 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE0789F1E88FDA800587485 /* QRCodeViewController.m */; };
@@ -84,6 +80,8 @@
 		EEEF217F1E25F87600C52E70 /* FileCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEF21661E25F87600C52E70 /* FileCacheManager.m */; };
 		EEEF21801E25F87600C52E70 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEF21681E25F87600C52E70 /* ProgressHUD.m */; };
 		EEEF21CF1E271FCD00C52E70 /* GFPDFWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEF21CE1E271FCD00C52E70 /* GFPDFWebViewController.m */; };
+		EEF5332A1ED3BFB50063D89A /* GFUserInfoCoreDataModel+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF533271ED3BFB50063D89A /* GFUserInfoCoreDataModel+CoreDataClass.m */; };
+		EEF5332B1ED3BFB50063D89A /* GFUserInfoCoreDataModel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF533291ED3BFB50063D89A /* GFUserInfoCoreDataModel+CoreDataProperties.m */; };
 		EEF5925E1EB9659D00B67214 /* GFDetailCell_HeadStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF5925C1EB9659D00B67214 /* GFDetailCell_HeadStyle.m */; };
 		EEF5925F1EB9659D00B67214 /* GFDetailCell_HeadStyle.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEF5925D1EB9659D00B67214 /* GFDetailCell_HeadStyle.xib */; };
 		EEF8972C1E236BDE00AA3AB3 /* GFItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF8972B1E236BDE00AA3AB3 /* GFItemModel.m */; };
@@ -263,17 +261,10 @@
 		EEC375151EB06FDB0024E04B /* GFDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFDownloadManager.m; sourceTree = "<group>"; };
 		EEC375161EB06FDB0024E04B /* GFImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFImageCache.h; sourceTree = "<group>"; };
 		EEC375171EB06FDB0024E04B /* GFImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFImageCache.m; sourceTree = "<group>"; };
-		EED17E191E8A34B70034F396 /* timg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = timg.jpg; sourceTree = "<group>"; };
-		EED8B7131E8B914A001F022E /* GFCreateChatGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCreateChatGroupViewController.h; sourceTree = "<group>"; };
-		EED8B7141E8B914A001F022E /* GFCreateChatGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFCreateChatGroupViewController.m; sourceTree = "<group>"; };
 		EED8B7161E8B9708001F022E /* GFKeyboardHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFKeyboardHelper.h; sourceTree = "<group>"; };
 		EED8B7171E8B9708001F022E /* GFKeyboardHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFKeyboardHelper.m; sourceTree = "<group>"; };
 		EED8B71C1E8B9853001F022E /* GFBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFBaseViewController.h; sourceTree = "<group>"; };
 		EED8B71D1E8B9853001F022E /* GFBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFBaseViewController.m; sourceTree = "<group>"; };
-		EEDB74131E8CEA5400C585C0 /* GFGroupListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGroupListViewController.h; sourceTree = "<group>"; };
-		EEDB74141E8CEA5400C585C0 /* GFGroupListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGroupListViewController.m; sourceTree = "<group>"; };
-		EEDC5A701EBABB6300367AC7 /* GFRCUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFRCUserInfo.h; sourceTree = "<group>"; };
-		EEDC5A711EBABB6300367AC7 /* GFRCUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFRCUserInfo.m; sourceTree = "<group>"; };
 		EEE0789C1E88FDA800587485 /* qrcode_scan_btn_flash_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrcode_scan_btn_flash_nor@2x.png"; sourceTree = "<group>"; };
 		EEE0789D1E88FDA800587485 /* qrcode_scan_btn_photo_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrcode_scan_btn_photo_nor@2x.png"; sourceTree = "<group>"; };
 		EEE0789E1E88FDA800587485 /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
@@ -327,6 +318,10 @@
 		EEEF21CE1E271FCD00C52E70 /* GFPDFWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFPDFWebViewController.m; sourceTree = "<group>"; };
 		EEEF21D01E2763D200C52E70 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		EEEF21D11E2763D200C52E70 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		EEF533261ED3BFB50063D89A /* GFUserInfoCoreDataModel+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GFUserInfoCoreDataModel+CoreDataClass.h"; sourceTree = "<group>"; };
+		EEF533271ED3BFB50063D89A /* GFUserInfoCoreDataModel+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GFUserInfoCoreDataModel+CoreDataClass.m"; sourceTree = "<group>"; };
+		EEF533281ED3BFB50063D89A /* GFUserInfoCoreDataModel+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GFUserInfoCoreDataModel+CoreDataProperties.h"; sourceTree = "<group>"; };
+		EEF533291ED3BFB50063D89A /* GFUserInfoCoreDataModel+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GFUserInfoCoreDataModel+CoreDataProperties.m"; sourceTree = "<group>"; };
 		EEF5925B1EB9659D00B67214 /* GFDetailCell_HeadStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFDetailCell_HeadStyle.h; path = ../GFDetailCell_HeadStyle.h; sourceTree = "<group>"; };
 		EEF5925C1EB9659D00B67214 /* GFDetailCell_HeadStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFDetailCell_HeadStyle.m; path = ../GFDetailCell_HeadStyle.m; sourceTree = "<group>"; };
 		EEF5925D1EB9659D00B67214 /* GFDetailCell_HeadStyle.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GFDetailCell_HeadStyle.xib; path = ../GFDetailCell_HeadStyle.xib; sourceTree = "<group>"; };
@@ -780,7 +775,6 @@
 			children = (
 				EE02E31C1E7BB7A100F48D3E /* CoreData.xcdatamodeld */,
 				F9137FFE1E03DBB1005BD72D /* PowerM3.entitlements */,
-				EED17E191E8A34B70034F396 /* timg.jpg */,
 				F92330781DF26C99005EB47E /* PowerM3 */,
 				F92330951DF26C9A005EB47E /* PowerM3Tests */,
 				F92330A01DF26C9A005EB47E /* PowerM3UITests */,
@@ -918,10 +912,6 @@
 				EEE3AC2A1E80B40500B0FEFE /* GFConversationViewController.m */,
 				EE42550B1EB8213500E70DF9 /* GFConversationDetailController.h */,
 				EE42550C1EB8213500E70DF9 /* GFConversationDetailController.m */,
-				EED8B7141E8B914A001F022E /* GFCreateChatGroupViewController.m */,
-				EED8B7131E8B914A001F022E /* GFCreateChatGroupViewController.h */,
-				EEDB74131E8CEA5400C585C0 /* GFGroupListViewController.h */,
-				EEDB74141E8CEA5400C585C0 /* GFGroupListViewController.m */,
 				EE514CC41E9761EF00CEC4E3 /* DiscussGroup(讨论组) */,
 			);
 			path = controller;
@@ -930,12 +920,14 @@
 		F92330B81DF26CF8005EB47E /* model */ = {
 			isa = PBXGroup;
 			children = (
+				EEF533261ED3BFB50063D89A /* GFUserInfoCoreDataModel+CoreDataClass.h */,
+				EEF533271ED3BFB50063D89A /* GFUserInfoCoreDataModel+CoreDataClass.m */,
+				EEF533281ED3BFB50063D89A /* GFUserInfoCoreDataModel+CoreDataProperties.h */,
+				EEF533291ED3BFB50063D89A /* GFUserInfoCoreDataModel+CoreDataProperties.m */,
 				EE3982561E77787A004574A6 /* GFRCloudHelper.h */,
 				EE3982571E77787A004574A6 /* GFRCloudHelper.m */,
 				EE68766F1E7A631600974A02 /* GFContactModel.h */,
 				EE6876701E7A631600974A02 /* GFContactModel.m */,
-				EEDC5A701EBABB6300367AC7 /* GFRCUserInfo.h */,
-				EEDC5A711EBABB6300367AC7 /* GFRCUserInfo.m */,
 				EE9A38311E8E1D75005EE91F /* GFContactListDelegate.h */,
 				EE9A38321E8E1D75005EE91F /* GFContactListDelegate.m */,
 			);
@@ -1376,7 +1368,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEE078AB1E890DD100587485 /* qrcode_scan_light_green@2x.png in Resources */,
-				EED17E1A1E8A34B70034F396 /* timg.jpg in Resources */,
 				F923308C1DF26C99005EB47E /* LaunchScreen.storyboard in Resources */,
 				F92F52A91E0818D0008AAB10 /* GFFixPhoneNumCell.xib in Resources */,
 				F92330891DF26C99005EB47E /* Assets.xcassets in Resources */,
@@ -1523,19 +1514,20 @@
 				EE02E3241E7BC16600F48D3E /* GFSearchResultController.m in Sources */,
 				EE514C251E971CAD00CEC4E3 /* ZFBaseSettingViewController.m in Sources */,
 				EEF897431E24DB1900AA3AB3 /* GFVoiceRecordViewController+coredata.m in Sources */,
+				EEF5332B1ED3BFB50063D89A /* GFUserInfoCoreDataModel+CoreDataProperties.m in Sources */,
 				EEF8973A1E24C40800AA3AB3 /* GFCommonHelper.m in Sources */,
 				EE5217431E70F8A000ADF6E2 /* GFConversationListViewController.m in Sources */,
 				F92331541DF31CA8005EB47E /* LoginDataSource.m in Sources */,
 				F92F52901E06BEB9008AAB10 /* GFWebsiteViewController.m in Sources */,
 				EE6876711E7A631600974A02 /* GFContactModel.m in Sources */,
 				EE4127AA1E6D6E9100A3BD82 /* HSSessionModel.m in Sources */,
+				EEF5332A1ED3BFB50063D89A /* GFUserInfoCoreDataModel+CoreDataClass.m in Sources */,
 				EE514C2A1E971CB700CEC4E3 /* ZFSettingGroup.m in Sources */,
 				EE4127A91E6D6E9100A3BD82 /* HSDownloadManager.m in Sources */,
 				EE279D671E5D757D0006C789 /* NSDate+Extension.m in Sources */,
 				EE38B1071E6FCA4B00C3024C /* GFNetworkHelper.m in Sources */,
 				EEC375181EB06FDB0024E04B /* GFDownloadManager.m in Sources */,
 				F92331831DF4F936005EB47E /* GFWebViewController.m in Sources */,
-				EED8B7151E8B914A001F022E /* GFCreateChatGroupViewController.m in Sources */,
 				EEE09FE71E7151FF00310CD6 /* EMCDDeviceManager+Microphone.m in Sources */,
 				F923307B1DF26C99005EB47E /* main.m in Sources */,
 				EEE09FFC1E7163FD00310CD6 /* amrFileCodec.mm in Sources */,
@@ -1547,7 +1539,6 @@
 				F92F52931E079EF0008AAB10 /* GFPersonInfoViewController.m in Sources */,
 				F92F53641E096E7E008AAB10 /* XHLocationHelper.m in Sources */,
 				F92330E91DF2FF79005EB47E /* RFJModel.m in Sources */,
-				EEDB74151E8CEA5400C585C0 /* GFGroupListViewController.m in Sources */,
 				EE67567C1EA8813300580FED /* GFContactsTableViewCell.m in Sources */,
 				EE68766E1E7A5E2A00974A02 /* GFBaseNavigationController.m in Sources */,
 				EEF5925E1EB9659D00B67214 /* GFDetailCell_HeadStyle.m in Sources */,
@@ -1572,7 +1563,6 @@
 				EEC375191EB06FDB0024E04B /* GFImageCache.m in Sources */,
 				EED8B71E1E8B9853001F022E /* GFBaseViewController.m in Sources */,
 				EE253E631E95DD5300EAECE1 /* GFGroupMemberViewController.m in Sources */,
-				EEDC5A721EBABB6300367AC7 /* GFRCUserInfo.m in Sources */,
 				EE9A38331E8E1D75005EE91F /* GFContactListDelegate.m in Sources */,
 				EE914C131EC0064C00CD5D80 /* GFUploadManager.m in Sources */,
 				EEE09FE41E7151FF00310CD6 /* EMAudioPlayerUtil.m in Sources */,
@@ -1845,11 +1835,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 2CJB2YAW58;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/PowerM3/Power_tool/HTTP/Network/MyUUID",
-					"$(PROJECT_DIR)/PowerM3/Power_tool/Expand/MyUUID",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PowerM3/GFPrefix.h";
 				INFOPLIST_FILE = PowerM3/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1880,11 +1866,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 2CJB2YAW58;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/PowerM3/Power_tool/HTTP/Network/MyUUID",
-					"$(PROJECT_DIR)/PowerM3/Power_tool/Expand/MyUUID",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PowerM3/GFPrefix.h";
 				INFOPLIST_FILE = PowerM3/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

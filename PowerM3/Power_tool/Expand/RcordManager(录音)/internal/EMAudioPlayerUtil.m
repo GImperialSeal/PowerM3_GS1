@@ -20,6 +20,8 @@ static EMAudioPlayerUtil *audioPlayerUtil = nil;
     void (^playFinish)(NSError *error);
 }
 
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, copy) playingProgress progressBlock;
 @end
 
 @implementation EMAudioPlayerUtil
@@ -35,7 +37,7 @@ static EMAudioPlayerUtil *audioPlayerUtil = nil;
 
 + (void)asyncPlayingWithPath:(NSString *)aFilePath
                   completion:(void(^)(NSError *error))completon{
-    [[EMAudioPlayerUtil sharedInstance] asyncPlayingWithPath:aFilePath
+    [[EMAudioPlayerUtil sharedInstance] startPlayingWithPath:aFilePath
                                                   completion:completon];
 }
 
@@ -43,6 +45,13 @@ static EMAudioPlayerUtil *audioPlayerUtil = nil;
     [[EMAudioPlayerUtil sharedInstance] stopCurrentPlaying];
 }
 
++ (CGFloat)playingProgress{
+    __block CGFloat pro;
+    [EMAudioPlayerUtil sharedInstance].progressBlock = ^(CGFloat progress) {
+        pro = progress;
+    };
+    return pro;
+}
 
 #pragma mark - private
 + (EMAudioPlayerUtil *)sharedInstance{
@@ -71,7 +80,7 @@ static EMAudioPlayerUtil *audioPlayerUtil = nil;
     return path;
 }
 
-- (void)asyncPlayingWithPath:(NSString *)aFilePath
+- (void)startPlayingWithPath:(NSString *)aFilePath
                   completion:(void(^)(NSError *error))completon{
     playFinish = completon;
     NSError *error = nil;
@@ -104,10 +113,22 @@ static EMAudioPlayerUtil *audioPlayerUtil = nil;
     _player.delegate = self;
     [_player prepareToPlay];
     [_player play];
+    
+    _timer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(playProgress) userInfo:nil repeats:YES];
 }
+
+
+- (void)playProgress{
+    CGFloat progress = _player.currentTime/_player.duration;
+    if(self.progressBlock) self.progressBlock(progress);
+}
+
 
 // 停止当前播放
 - (void)stopCurrentPlaying{
+    
+    [_timer invalidate];
+    _timer = nil;
     if(_player){
         _player.delegate = nil;
         [_player stop];

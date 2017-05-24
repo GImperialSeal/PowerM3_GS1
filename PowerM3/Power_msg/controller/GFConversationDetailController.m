@@ -9,6 +9,7 @@
 #import "GFConversationDetailController.h"
 #import "GFRCloudHelper.h"
 #import "GFConversationViewController.h"
+#import "GFUserInfoCoreDataModel+CoreDataProperties.h"
 #import "GFActionSheet.h"
 @import MessageUI;
 @interface GFConversationDetailController ()<MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
@@ -21,7 +22,7 @@
     [super viewDidLoad];
     
 
-    GFRCUserInfo  *rcInfo = (GFRCUserInfo *)[[GFRCloudHelper shareInstace] currentUserInfoWithUserId:self.userId];
+    GFUserInfoCoreDataModel  *rcInfo = [GFUserInfoCoreDataModel findUserByUserId:self.userId];
 
     NSArray *strArr = [rcInfo.name componentsSeparatedByString:@"/"];
     
@@ -67,7 +68,7 @@
     email.type = ZFSettingItemTypeNone;
     email.operation = ^(ZFSettingItem *item) {
         
-        [GFActionSheet ActionSheetWithTitle:@"" buttonTitles:@[] cancelButtonTitle:@"取消" completionBlock:^(NSUInteger buttonIndex) {
+        [GFActionSheet ActionSheetWithTitle:@"" buttonTitles:@[@"发送邮件"] cancelButtonTitle:@"取消" completionBlock:^(NSUInteger buttonIndex) {
             if (buttonIndex == 1) {
                 [weakself sendEmailToEmail:item.subtitle];
             }

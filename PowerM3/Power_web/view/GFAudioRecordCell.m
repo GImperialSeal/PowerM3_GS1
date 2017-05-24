@@ -7,16 +7,51 @@
 //
 
 #import "GFAudioRecordCell.h"
-
+#import "GFAudioRecordCoreDataModel+CoreDataProperties.h"
+#import "GFUploadManager.h"
+#import "EMCDDeviceManager+Media.h"
 @implementation GFAudioRecordCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
-- (IBAction)playRecord {
+
+// 上传
+- (IBAction)share:(id)sender {
+    [[GFUploadManager manager]uploadAudioWithParameters:@{} VideoPath:@"" UrlString:@"" complete:^{
+        
+    } failure:^{
+        
+    }];
+    
 }
-- (IBAction)more {
+
+// 编辑
+- (IBAction)edit:(id)sender {
+    
+}
+
+// 删除
+- (IBAction)delete:(id)sender {
+    [[NSManagedObjectContext MR_defaultContext] deleteObject:_model];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+    [[NSFileManager defaultManager] removeItemAtPath:[GFDomainManager appendFilePath:_model.fileName] error:nil];
+}
+
+// 播放
+- (IBAction)play:(UIButton *)sender {
+    
+    if (sender) {
+        [[EMCDDeviceManager sharedInstance] stopPlaying];
+  
+    }else{
+        [[EMCDDeviceManager sharedInstance] asyncPlayingWithPath:[GFDomainManager appendFilePath:_model.fileName] completion:^(NSError *error) {
+            
+        }];
+    }
+    sender.selected = !sender.selected;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

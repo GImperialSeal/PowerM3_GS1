@@ -36,6 +36,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    
     // 模糊
 //    UIBlurEffect *beffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
 //    UIVisualEffectView *effectView = [[UIVisualEffectView alloc]initWithEffect:beffect];
@@ -45,6 +47,10 @@
     
 }
 
+- (void)presentSearchController:(UISearchController *)searchController{
+    
+    
+}
 
 
 

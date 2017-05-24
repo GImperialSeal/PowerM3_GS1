@@ -44,43 +44,6 @@ typedef void(^networkStatus)(NetworkStatusType status);
                                   URL:(NSString *)URL
                            parameters:(NSString *)parametersStr
                               success:(void(^)(id response,id data,NSError *error))success;
-/**
- *  上传图片
- *
- *  @param parameters  上传图片预留参数---视具体情况而定 可移除
- *  @param images      上传的图片数组
- *  @param width       图片要被压缩到的宽度
- *  @param URL   上传的url
- *  @param success     上传成功的回调
- *  @param failure     上传失败的回调
- *  @param progress    上传进度
- */
-+(void)UploadPicturesWithURL:(NSString *)URL
-                  parameters:(id)parameters
-                      images:(NSArray *)images
-                 targetWidth:(CGFloat )width
-              UploadProgress:(uploadProgress)progress
-                     success:(requestSuccess)success
-                     failure:(requestFailure)failure;
-/**
- *  视频上传
- *
- *  @param parameters   上传视频预留参数---视具体情况而定 可移除
- *  @param videoPath    上传视频的本地沙河路径
- *  @param urlString    上传的url
- *  @param successBlock 成功的回调
- *  @param failureBlock 失败的回调
- *  @param progress     上传的进度
- */
-+(void)uploadVideoWithParameters:(NSDictionary *)parameters
-                       VideoPath:(NSString *)videoPath
-                       UrlString:(NSString *)urlString
-                  UploadProgress:(uploadProgress)progress
-                    SuccessBlock:(requestSuccess)successBlock
-                    FailureBlock:(requestFailure)failureBlock;
-
-
-
 
 
 /**

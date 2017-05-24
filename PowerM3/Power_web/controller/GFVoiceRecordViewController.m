@@ -152,31 +152,28 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    GFAudioRecordCoreDataModel * model = [self.fetchedResultsController objectAtIndexPath:indexPath];
+static NSInteger _selectedRow ;
 
-    [GFActionSheet ActionSheetWithTitle:@"" buttonTitles:@[@"播放录音",@"上传",@"删除"] cancelButtonTitle:@"取消" completionBlock:^(NSUInteger buttonIndex) {
-        switch (buttonIndex) {
-            case 1:
-                [[EMCDDeviceManager sharedInstance] asyncPlayingWithPath:model.filePath completion:^(NSError *error) {
-                    [GFAlertView alertWithTitle:@"录音文件不存在"];
-                }];
-                
-                break;
-            case 2:
-                
-                break;
-                
-            case 3:
-                [[NSManagedObjectContext MR_defaultContext] deleteObject:model];
-                [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-                [[NSFileManager defaultManager] removeItemAtPath:model.filePath error:nil];
-                [self renameOfRecordNameLabel];
-                break;
-            default:
-                break;
-        }
-    }];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == _selectedRow) {
+        return 136;
+    }
+    return 56;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    _selectedRow = indexPath.row;
+    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    GFAudioRecordCoreDataModel * model = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    GFAudioRecordCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.model = model;
+    cell.selectedRow = indexPath.row;
+    
+    //[self renameOfRecordNameLabel];
 }
 
 - (void)didReceiveMemoryWarning {

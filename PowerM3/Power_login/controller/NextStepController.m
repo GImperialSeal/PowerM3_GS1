@@ -120,13 +120,12 @@
         if (![GFUserDefault boolForKey:@"unarchive_zip"]) {
             [weakself unArchiveFileWithName:filePath];
         }
-
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginOrNot" object:@(YES)];
+        [GFCommonHelper replaceRootWindowWithOptions:NO];
 
     } failure:^(NSError *error) {
+        
         [MBProgressHUD showError:@"数据缓存失效" toView:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginOrNot" object:@(YES)];
-
+        [GFCommonHelper replaceRootWindowWithOptions:NO];
     }];
     
 }

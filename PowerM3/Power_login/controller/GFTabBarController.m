@@ -37,8 +37,8 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
 }
-
 
 
 
@@ -57,19 +57,16 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
     if (![GFCommonHelper lookupWebViewCookieDeleteOrNot:NO]) {
         // 本地cookie 失效 重新调用登录的接口
         
-        BLog(@"*********  login ***********");
-
          [self autoLogin];
+        
+        
     }else{
+        
         __weak typeof(self)weakself = self;
         [GFCommonHelper validateCookieSessionidCompletion:^{
             [weakself addControllers];
         }];
     }
-    
-
-    // 链接融云
-     [self connectRCloud];
 }
 
 
@@ -103,11 +100,6 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
     selected = !selected;
 }
 
-
-
-
-
-
 #pragma mark ----- 登录
 - (void)autoLogin{
     __weak typeof(self) weakSelf = self;
@@ -115,14 +107,12 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
     NSString *code     = [GFCommonHelper currentWebSite].password;
     
     assert(userName.length);
-    
     [MBProgressHUD showMessag:@"正在登录...." toView:self.view];
     [GFCommonHelper login:userName code:code completion:^(LoginSuccessedDataSource *obj) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         [weakSelf addControllers];
     }failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        
         [GFAlertView showAlertWithTitle:@"提示" message:[GFDomainError localizedDescription:error] completionBlock:^(NSUInteger buttonIndex, GFAlertView *alertView) {
             if (buttonIndex == 0) {
                 [GFNotification postNotificationName:@"LoginOrNot" object:@(NO)];
@@ -151,6 +141,9 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
             }else{
                 _selectedIndex = [responseObject[@"data"][@"selectedIndex"] integerValue];
                 [weakself loadTabbar:buttonItems];
+                
+                // 链接融云
+                [weakself connectRCloud];
             }
         }
     } failure:^(NSError *err) {
@@ -172,7 +165,6 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
 
 // set UI
 - (void)loadTabbar:(NSArray *)buttonItems{
-    BLog(@"thread: %@",[NSThread currentThread]);
     
     NSMutableArray *navigationControllerArray = [NSMutableArray array];
     
@@ -191,14 +183,15 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
                 [[NSUserDefaults standardUserDefaults] setValue:model.titleid forKey:@"epsprojid"];
                 [GFCommonHelper websiteSetValue:model.title forKey:@"epsprojectID"];
             }
+            
+            controller.navigationItem.title = model.title;
         }else if(i == buttonItems.count-2){
             controller = [[GFConversationListViewController alloc]init];
         }else{
             
-            controller = MAINSTORYBOARD(@"GFVoiceRecordViewController");
-            //controller = [[GFSettingViewController alloc]init];
+           // controller = MAINSTORYBOARD(@"GFVoiceRecordViewController");
+            controller = [[GFSettingViewController alloc]init];
         }
-        controller.navigationItem.title = model.title;
         
         UIImage *normal = [[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:model.icon]]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         UIImage *select = [[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:model.iconselected]]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -217,6 +210,7 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
 - (void)connectRCloud{
     
     GFWebsiteCoreDataModel *coredataInfo = [GFCommonHelper currentWebSite];
+    
     RCUserInfo *userinfo = [[RCUserInfo alloc] initWithUserId:coredataInfo.humanID name:coredataInfo.name portrait:coredataInfo.headImage];
     
     BLog(@" user id: %@ ",coredataInfo.humanID);

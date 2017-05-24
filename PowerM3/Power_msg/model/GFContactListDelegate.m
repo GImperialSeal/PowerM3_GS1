@@ -10,7 +10,6 @@
 #import "GFConversationViewController.h"
 #import "GFRCloudHelper.h"
 #import "MJRefresh.h"
-#import "GFGroupListViewController.h"
 #import "GFContactModel.h"
 #import <RongIMKit/RongIMKit.h>
 #import "GFContactsTableViewCell.h"
@@ -46,7 +45,6 @@
     GFContactsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     RCUserInfo *info = _friendsDict[_keys[indexPath.section]][indexPath.row];
     
-     BLog(@"headimage: %@",info.portraitUri);
     [cell.headImageView gf_loadImagesWithURL:info.portraitUri];
     
     cell.titleLabel.text = info.name;
@@ -78,10 +76,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index{
     
-    NSInteger count = 0;
-    
-    BLog(@"%@-%ld",title,(long)index);
-    
+    NSInteger count = 0;    
     for(NSString *character in _keys)
     {
         if([character isEqualToString:title])

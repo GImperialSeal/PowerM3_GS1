@@ -19,6 +19,7 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 
+#import "GFUserInfoCoreDataModel+CoreDataProperties.h"
 #import "GFRCloudHelper.h"
 typedef NS_ENUM(NSInteger, ReceivedNoticationMode) {
     ReceivedNotication_killed,
@@ -37,26 +38,22 @@ typedef NS_ENUM(NSInteger, ReceivedNoticationMode) {
     // Override point for customization after application launch.
     
     [MagicalRecord setupCoreDataStackWithStoreNamed:@"CoreData.splite"];
+    
+    //[GFUserInfoCoreDataModel deleteAllEntity];
+    
     //[self registerJPushWithOptions:launchOptions];
-    [[RCIM sharedRCIM] initWithAppKey:@"pkfcgjstprms8"];
-    [[RCIM sharedRCIM] setUserInfoDataSource:[GFRCloudHelper shareInstace]];
-    [[RCIM sharedRCIM] setGroupInfoDataSource:[GFRCloudHelper shareInstace]];
-    [[RCIM sharedRCIM] setReceiveMessageDelegate:[GFRCloudHelper shareInstace]];
-    [[RCIM sharedRCIM] setEnablePersistentUserInfoCache:YES];
-    [[RCIM sharedRCIM] setEnableSyncReadStatus:YES];
-    [[RCIM sharedRCIM] setEnableMessageMentioned:YES];//@
-    [[RCIM sharedRCIM] setEnableMessageRecall:YES];// 撤回
-    [[RCIMClient sharedRCIMClient] recordLaunchOptionsEvent:launchOptions];
-
-     [self autoLogin];
+    [[GFRCloudHelper shareInstace] initRCIMWithOptions:launchOptions];
+    [self loginWithNeedLogin:![GFUserDefault boolForKey:POWERM3AUTOLOGINKEY]];
 
     // 收到通知跳转到指定界面
     [self ReceivedNotified:ReceivedNotication_killed dictionary:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]];
     
     
+        
     return YES;
     
 }
+
 
 
 - (void)showAlert{
@@ -64,37 +61,21 @@ typedef NS_ENUM(NSInteger, ReceivedNoticationMode) {
         if (buttonIndex == 0) {
             [GFNotification postNotificationName:@"LoginOrNot" object:@(NO)];
         }else{
-            
         }
     } cancelButtonTitle:@"重新登录" otherButtonTitles:@"重试",nil];
 }
 
 
 
-#pragma mark -  自动登录
-- (void)autoLogin{
-    
-    if ([GFUserDefault boolForKey:POWERM3AUTOLOGINKEY]) {
-         self.window.rootViewController = [self drawViewController:[[GFTabBarController alloc]init] showMenuViewController:[[UINavigationController alloc]initWithRootViewController:[[GFMenuViewController alloc]init]]];
-    }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSuccessLogin:) name:@"LoginOrNot" object:nil];
-}
-- (void)didSuccessLogin:(NSNotification *)noti{
-    BOOL login = [noti.object boolValue];
-    if (login) {
-        self.window.rootViewController = [self drawViewController:[[GFTabBarController alloc]init] showMenuViewController:[[UINavigationController alloc]initWithRootViewController:[[GFMenuViewController alloc]init]]];
-    }else{
-        BLog(@"登-录-login vc");
-
+#pragma mark - login
+- (void)loginWithNeedLogin:(BOOL)logined{
+    if (logined) {
         self.window.rootViewController = MAINSTORYBOARD(@"GFLoginNavigationController");
+    }else{
+        self.drawViewController = [[GFDrawViewController alloc]initWithRootViewController:[[GFTabBarController alloc]init]];
+        self.drawViewController.menuViewController = [[UINavigationController alloc]initWithRootViewController:[[GFMenuViewController alloc]init]];
+        self.window.rootViewController = self.drawViewController;
     }
-}
-- (GFDrawViewController *)drawViewController:(UIViewController *)rootViewController showMenuViewController:(UIViewController *)menuViewController{
-    BLog(@"load draw vc");
-
-    self.drawViewController = [[GFDrawViewController alloc]initWithRootViewController:rootViewController];
-    self.drawViewController.menuViewController = menuViewController;
-    return self.drawViewController;
 }
 
 - (void)ReceivedNotified:(ReceivedNoticationMode)mode dictionary:(NSDictionary *)dic{
@@ -292,20 +273,20 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
     if (![dic count]) {
         return nil;
     }
-    NSString *tempStr1 =
-    [[dic description] stringByReplacingOccurrencesOfString:@"\\u"
-                                                 withString:@"\\U"];
-    NSString *tempStr2 =
-    [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
-    NSString *tempStr3 =
-    [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
-    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *str =
-    [NSPropertyListSerialization propertyListFromData:tempData
-                                     mutabilityOption:NSPropertyListImmutable
-                                               format:NULL
-                                     errorDescription:NULL];
-    return str;
+//    NSString *tempStr1 =
+//    [[dic description] stringByReplacingOccurrencesOfString:@"\\u"
+//                                                 withString:@"\\U"];
+//    NSString *tempStr2 =
+//    [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+//    NSString *tempStr3 =
+//    [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+//    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
+//    NSString *str =
+//    [NSPropertyListSerialization propertyListFromData:tempData
+//                                     mutabilityOption:NSPropertyListImmutable
+//                                               format:NULL
+//                                     errorDescription:NULL];
+    return nil;
 }
 
 
