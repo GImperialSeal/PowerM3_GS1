@@ -52,20 +52,12 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
     self.view.backgroundColor = [UIColor whiteColor];
     
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:GFThemeColor} forState:UIControlStateSelected];
-    // 登录
-    
     if (![GFCommonHelper lookupWebViewCookieDeleteOrNot:NO]) {
         // 本地cookie 失效 重新调用登录的接口
-        
          [self autoLogin];
-        
-        
     }else{
-        
         __weak typeof(self)weakself = self;
-        [GFCommonHelper validateCookieSessionidCompletion:^{
-            [weakself addControllers];
-        }];
+        [weakself addControllers];
     }
 }
 
@@ -115,7 +107,7 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         [GFAlertView showAlertWithTitle:@"提示" message:[GFDomainError localizedDescription:error] completionBlock:^(NSUInteger buttonIndex, GFAlertView *alertView) {
             if (buttonIndex == 0) {
-                [GFNotification postNotificationName:@"LoginOrNot" object:@(NO)];
+                [GFCommonHelper replaceRootWindowWithOptions:YES];
             }else{
                 [weakSelf autoLogin];
             }
@@ -156,7 +148,7 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
 - (void)showAlert{
     [GFAlertView showAlertWithTitle:@"提示" message:@"数据加载失败..." completionBlock:^(NSUInteger buttonIndex, GFAlertView *alertView) {
         if (buttonIndex == 0) {
-            [GFNotification postNotificationName:@"LoginOrNot" object:@(NO)];
+            [GFCommonHelper replaceRootWindowWithOptions:YES];
         }else{
             [self addControllers];
         }

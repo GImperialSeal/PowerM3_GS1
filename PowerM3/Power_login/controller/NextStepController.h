@@ -7,8 +7,8 @@
 //
 
 @import UIKit;
-
-@interface NextStepController : UIViewController
+#import "GFBaseViewController.h"
+@interface NextStepController :GFBaseViewController
 
 @property (nonatomic,strong) NSString *url;
 

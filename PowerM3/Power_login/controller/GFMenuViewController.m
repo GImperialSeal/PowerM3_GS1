@@ -21,7 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-     BLog(@"********** menu  load ***************");
     
     self.sourceArray = [NSMutableArray array];
     self.tableView.showsHorizontalScrollIndicator = NO;

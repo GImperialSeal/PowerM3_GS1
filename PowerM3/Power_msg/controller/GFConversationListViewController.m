@@ -46,6 +46,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    __weak typeof(self)weakself = self;
+    [[GFRCloudHelper shareInstace] syncFriendList:^(NSArray *friends, BOOL isSuccess) {
+        if (isSuccess) [weakself sortArr:friends];
+        else BLog(@"刷新失败");
+    }];
+
+    
     [self setUI];
 }
 
@@ -66,14 +73,13 @@
     _contactDelegate = [[GFContactListDelegate alloc]init];
     _contactDelegate.newsNavigationController = self.navigationController;
 
-    [self sortArr:[GFUserInfoCoreDataModel findAll]];
-
+    __weak typeof(self)weakself = self;
     // 下拉刷新
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [[GFRCloudHelper shareInstace] syncFriendList:^(NSArray *friends, BOOL isSuccess) {
             [self.conversationListTableView.mj_header endRefreshing];
-            if (isSuccess) [self sortArr:friends];
+            if (isSuccess) [weakself sortArr:friends];
             else BLog(@"刷新失败");
         }];
     }];

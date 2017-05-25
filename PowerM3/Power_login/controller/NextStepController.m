@@ -46,7 +46,9 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
-
+    
+    self.textFieldMaxY = CGRectGetMaxY(self.loginButton.frame);
+    
     // 加载二维码的图片
     _companyLogo.layer.masksToBounds = YES;
     _companyLogo.layer.cornerRadius = _companyLogo.frame.size.height/2;

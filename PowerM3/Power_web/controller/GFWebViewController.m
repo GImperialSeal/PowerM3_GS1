@@ -34,6 +34,10 @@
 @property (nonatomic,strong) UIImageView *leftBarIcon;
 @property (nonatomic,strong) GFLocationHelper *locationHelper;
 @property (nonatomic,strong) QRCodeViewController *qrcode;
+
+
+@property (nonatomic,strong) NSString *executeJSFunctionWhenClosedWebView;
+
 @end
 
 
@@ -47,12 +51,21 @@
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar addSubview:_progressView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNotiFromMenuViewController:) name:@"reloadWebView" object:nil];
+    
+    if (self.executeJSFunctionWhenClosedWebView&&![self.executeJSFunctionWhenClosedWebView isEqualToString:@"undefined"]&&self.executeJSFunctionWhenClosedWebView.length) {
+//        NSInteger index = self.navigationController.viewControllers.count-1;
+//        GFWebViewSubViewController *subWeb = self.navigationController.viewControllers[index];
+//        [subWeb.webView reload];
+       // [_context[_executeJSFunctionWhenClosedWebView] callWithArguments:@[@""]];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [_progressView removeFromSuperview];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+   
 }
 
 - (void)viewDidLoad{
@@ -173,6 +186,8 @@
         weakSelf.handleJS = [[HandleJSCommand alloc]initWithJsonDict:jsonDic];
         weakSelf.handleJS.function = function;
         weakSelf.handleJS.context = [JSContext currentContext];
+        weakSelf.executeJSFunctionWhenClosedWebView = more;
+
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf JS_OC:order parameter:jsonDic function:function parameterOfString:parameter];
         });
@@ -245,6 +260,8 @@
         
         // new web
         // back : {'success':true, message:'', value:''}
+        
+        //
 
         [self openNewWebViewWithOrder:order Parameter:dic function:function];
 

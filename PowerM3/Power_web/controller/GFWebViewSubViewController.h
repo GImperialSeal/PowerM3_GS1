@@ -11,4 +11,6 @@
 @interface GFWebViewSubViewController : GFWebViewController
 @property(nonatomic, strong) NSDictionary *wizardDictionary;
 
+@property (nonatomic, strong) NSString *closedFunc;
+
 @end

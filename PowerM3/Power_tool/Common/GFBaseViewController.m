@@ -9,7 +9,6 @@
 #import "GFBaseViewController.h"
 #import "TZImagePickerController.h"
 #import "TZImageManager.h"
-
 @interface GFBaseViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, copy) void(^didFinishPickingImageHandle)(UIImage *image);
@@ -22,6 +21,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardChange:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardChange:) name:UIKeyboardWillHideNotification object:nil];
 
@@ -46,6 +46,8 @@
     
     [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         if (noti.name == UIKeyboardWillShowNotification) {
+            
+            
             if ( KH-keyboardEndFrame.size.height-_textFieldMaxY -20<0) {
                  self.view.transform = CGAffineTransformMakeTranslation(0, KH-keyboardEndFrame.size.height-_textFieldMaxY -20);
             }
