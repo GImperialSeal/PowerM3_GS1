@@ -34,8 +34,6 @@
 @property (nonatomic,strong) UIImageView *leftBarIcon;
 @property (nonatomic,strong) GFLocationHelper *locationHelper;
 @property (nonatomic,strong) QRCodeViewController *qrcode;
-
-
 @property (nonatomic,strong) NSString *executeJSFunctionWhenClosedWebView;
 
 @end

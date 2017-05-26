@@ -48,17 +48,10 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
     [super viewDidLoad];
     
     BLog(@"did load");
-
     self.view.backgroundColor = [UIColor whiteColor];
-    
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:GFThemeColor} forState:UIControlStateSelected];
-    if (![GFCommonHelper lookupWebViewCookieDeleteOrNot:NO]) {
-        // 本地cookie 失效 重新调用登录的接口
-         [self autoLogin];
-    }else{
-        __weak typeof(self)weakself = self;
-        [weakself addControllers];
-    }
+    [self addControllers];
+
 }
 
 
@@ -92,28 +85,6 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
     selected = !selected;
 }
 
-#pragma mark ----- 登录
-- (void)autoLogin{
-    __weak typeof(self) weakSelf = self;
-    NSString *userName = [GFCommonHelper currentWebSite].admin;
-    NSString *code     = [GFCommonHelper currentWebSite].password;
-    
-    assert(userName.length);
-    [MBProgressHUD showMessag:@"正在登录...." toView:self.view];
-    [GFCommonHelper login:userName code:code completion:^(LoginSuccessedDataSource *obj) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        [weakSelf addControllers];
-    }failure:^(NSError *error) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        [GFAlertView showAlertWithTitle:@"提示" message:[GFDomainError localizedDescription:error] completionBlock:^(NSUInteger buttonIndex, GFAlertView *alertView) {
-            if (buttonIndex == 0) {
-                [GFCommonHelper replaceRootWindowWithOptions:YES];
-            }else{
-                [weakSelf autoLogin];
-            }
-        } cancelButtonTitle:@"重新登录" otherButtonTitles:@"重试",nil];
-    }];
-}
 
 // 加载 tabbar controllers
 - (void)addControllers{
@@ -148,7 +119,7 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
 - (void)showAlert{
     [GFAlertView showAlertWithTitle:@"提示" message:@"数据加载失败..." completionBlock:^(NSUInteger buttonIndex, GFAlertView *alertView) {
         if (buttonIndex == 0) {
-            [GFCommonHelper replaceRootWindowWithOptions:YES];
+            [UIApplication sharedApplication].delegate.window.rootViewController = MAINSTORYBOARD(@"GFLoginNavigationController");
         }else{
             [self addControllers];
         }
@@ -180,7 +151,6 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
         }else if(i == buttonItems.count-2){
             controller = [[GFConversationListViewController alloc]init];
         }else{
-            
            // controller = MAINSTORYBOARD(@"GFVoiceRecordViewController");
             controller = [[GFSettingViewController alloc]init];
         }

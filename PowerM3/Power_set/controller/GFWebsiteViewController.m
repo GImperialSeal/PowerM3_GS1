@@ -78,7 +78,7 @@
         [GFAlertView showAlertWithTitle:@"" message:[NSString stringWithFormat:@"是否要切换到站点: %@ ",info.url] completionBlock:^(NSUInteger buttonIndex, GFAlertView *alertView) {
             if (buttonIndex == 1) {
                 [GFUserDefault setValue:info.url forKey:PowerOnWebsiteUserDefaultKey];
-                [GFCommonHelper replaceRootWindowWithOptions:NO];
+                [GFCommonHelper replaceRootViewControllerOptions:ReplaceWithLoginController];
             }
         } cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
     }

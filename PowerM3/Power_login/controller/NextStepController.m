@@ -17,6 +17,7 @@
 #import "GFWebsiteCoreDataModel+CoreDataProperties.h"
 #import "FileCacheManager.h"
 #import "GFDownloadManager.h"
+#import "AppDelegate.h"
 
 @interface NextStepController ()<UICollisionBehaviorDelegate>
 
@@ -95,7 +96,6 @@
     [MBProgressHUD showMessag:@"正在登录...." toView:self.view];
     [GFCommonHelper login:_userName.text code:_passWord.text completion:^(LoginSuccessedDataSource *model){
         [MBProgressHUD hideHUDForView:weakself.view animated:YES];
-        [GFUserDefault setBool:YES forKey:POWERM3AUTOLOGINKEY];
         // 下载安装包
         [weakself downloadApp_webCookies:model.app_downloadCookie];
     } failure:^(NSError *error) {
@@ -119,15 +119,12 @@
         weakself.downloadView.progress =  100.f * progress;
         
     } complete:^(NSURL *filePath) {
-        if (![GFUserDefault boolForKey:@"unarchive_zip"]) {
-            [weakself unArchiveFileWithName:filePath];
-        }
-        [GFCommonHelper replaceRootWindowWithOptions:NO];
-
-    } failure:^(NSError *error) {
+        if (![GFUserDefault boolForKey:@"unarchive_zip"])[weakself unArchiveFileWithName:filePath];
         
+        [GFCommonHelper replaceRootViewControllerOptions:ReplaceWithTabbarController];
+    } failure:^(NSError *error) {
+        [GFCommonHelper replaceRootViewControllerOptions:ReplaceWithTabbarController];
         [MBProgressHUD showError:@"数据缓存失效" toView:nil];
-        [GFCommonHelper replaceRootWindowWithOptions:NO];
     }];
     
 }

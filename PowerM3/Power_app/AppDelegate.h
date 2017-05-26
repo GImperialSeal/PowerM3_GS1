@@ -17,7 +17,5 @@
 
 @property (nonatomic, strong) GFDrawViewController *drawViewController;
 
-- (void)loginWithNeedLogin:(BOOL)logined;
-
 @end
 

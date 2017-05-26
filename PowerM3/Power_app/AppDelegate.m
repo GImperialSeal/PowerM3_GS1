@@ -18,8 +18,8 @@
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
-
 #import "GFUserInfoCoreDataModel+CoreDataProperties.h"
+#import "GFWebsiteCoreDataModel+CoreDataProperties.h"
 #import "GFRCloudHelper.h"
 typedef NS_ENUM(NSInteger, ReceivedNoticationMode) {
     ReceivedNotication_killed,
@@ -43,11 +43,10 @@ typedef NS_ENUM(NSInteger, ReceivedNoticationMode) {
     
     //[self registerJPushWithOptions:launchOptions];
     [[GFRCloudHelper shareInstace] initRCIMWithOptions:launchOptions];
-    [self loginWithNeedLogin:![GFUserDefault boolForKey:POWERM3AUTOLOGINKEY]];
+    [self autoLogin];
 
     // 收到通知跳转到指定界面
     [self ReceivedNotified:ReceivedNotication_killed dictionary:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]];
-    
     
         
     return YES;
@@ -55,28 +54,34 @@ typedef NS_ENUM(NSInteger, ReceivedNoticationMode) {
 }
 
 
-
-- (void)showAlert{
-    [GFAlertView showAlertWithTitle:@"提示" message:@"网络请求失败..." completionBlock:^(NSUInteger buttonIndex, GFAlertView *alertView) {
-        if (buttonIndex == 0) {
-            [GFNotification postNotificationName:@"LoginOrNot" object:@(NO)];
-        }else{
-        }
-    } cancelButtonTitle:@"重新登录" otherButtonTitles:@"重试",nil];
-}
-
-
-
 #pragma mark - login
-- (void)loginWithNeedLogin:(BOOL)logined{
-    if (logined) {
-        self.window.rootViewController = MAINSTORYBOARD(@"GFLoginNavigationController");
-    }else{
-        self.drawViewController = [[GFDrawViewController alloc]initWithRootViewController:[[GFTabBarController alloc]init]];
-        self.drawViewController.menuViewController = [[UINavigationController alloc]initWithRootViewController:[[GFMenuViewController alloc]init]];
-        self.window.rootViewController = self.drawViewController;
+- (void)autoLogin{
+    GFWebsiteCoreDataModel *model = [GFCommonHelper currentWebSite];
+    if (model.url&&model.url.length&&model.admin&&model.admin.length) {
+                
+        __weak typeof(self) weakSelf = self;
+        NSString *userName = model.admin;
+        NSString *code     = model.password;
+        // [MBProgressHUD showMessag:@"正在登录...." toView:nil];
+        [GFCommonHelper login:userName code:code completion:^(LoginSuccessedDataSource *obj) {
+            [MBProgressHUD hideHUDForView:nil animated:YES];
+            // 加载mainview
+            [GFCommonHelper replaceRootViewControllerOptions:ReplaceWithTabbarController];
+            
+        }failure:^(NSError *error) {
+            [MBProgressHUD hideHUDForView:nil animated:YES];
+            [GFAlertView showAlertWithTitle:@"提示" message:[GFDomainError localizedDescription:error] completionBlock:^(NSUInteger buttonIndex, GFAlertView *alertView) {
+                if (buttonIndex == 0) {
+                    [GFCommonHelper replaceRootViewControllerOptions:ReplaceWithLoginController];
+                }else{
+                    [weakSelf autoLogin];
+                }
+            } cancelButtonTitle:@"重新登录" otherButtonTitles:@"重试",nil];
+        }];
     }
 }
+
+
 
 - (void)ReceivedNotified:(ReceivedNoticationMode)mode dictionary:(NSDictionary *)dic{
     BLog(@"received noti");

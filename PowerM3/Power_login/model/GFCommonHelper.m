@@ -12,6 +12,12 @@
 #import "UIActivityIndicatorView+AFNetworking.h"
 #import "NSString+Extension.h"
 #import "AppDelegate.h"
+
+#import "GFTabBarController.h"
+#import "GFMenuViewController.h"
+
+
+
 @import JavaScriptCore;
 
 
@@ -26,21 +32,32 @@
     return model;
 }
 
-
-+ (void)replaceRootWindowWithOptions:(BOOL)login{
-    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [app loginWithNeedLogin:login];
-}
-
 + (void)websiteSetValue:(id)value forKey:(NSString *)key{
     GFWebsiteCoreDataModel *model = [GFWebsiteCoreDataModel MR_findFirstByAttribute:@"url" withValue:POWERM3URL];
     [model setValue:value forKey:key];
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 }
 
-+ (void)getUserToken{
++ (void)replaceRootViewControllerOptions:(GFReplaceRootViewOptions)options{
+    switch (options) {
+        case ReplaceWithTabbarController:{
+            AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            app.drawViewController = [[GFDrawViewController alloc]initWithRootViewController:[[GFTabBarController alloc]init]];
+            app.drawViewController.menuViewController = [[UINavigationController alloc]initWithRootViewController:[[GFMenuViewController alloc]init]];
+            [UIApplication sharedApplication].delegate.window.rootViewController = app.drawViewController;
+
+            break;
+        }
+        case ReplaceWithLoginController:{
+            [UIApplication sharedApplication].delegate.window.rootViewController = MAINSTORYBOARD(@"GFLoginNavigationController");
+            break;
+        }
+
+        default:
+            break;
+    }
     
-    
+
 }
 
 
@@ -144,7 +161,12 @@
         if ([cookie.name isEqualToString:@"PowerWebCertificate"]) {
             NSComparisonResult result = [[NSDate date] compare:cookie.expiresDate];
 
+            
+            
             if (result == NSOrderedAscending) {
+                
+                
+                
                 return YES;
             }
             
