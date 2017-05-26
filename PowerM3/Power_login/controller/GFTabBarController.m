@@ -47,10 +47,38 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    BLog(@"did load");
     self.view.backgroundColor = [UIColor whiteColor];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:GFThemeColor} forState:UIControlStateSelected];
-    [self addControllers];
+    
+    [self requestWebsiteInfoFromServer];
+}
+
+
+- (void)requestWebsiteInfoFromServer{
+    [MBProgressHUD showMessag:@"加载数据...." toView:self.view];
+    __weak typeof(self)weakself = self;
+    [GFNetworkHelper GET:WebViewURL parameters:nil success:^(id responseObject) {
+        [MBProgressHUD hideHUDForView:weakself.view animated:YES];
+        if (![responseObject[@"success"] boolValue]) {
+            [weakself showAlert];
+        }else{
+            NSError *jsonErr;
+            NSArray *buttonItems = [NSJSONSerialization JSONObjectWithData:[responseObject[@"data"][@"app_mainbutton"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:&jsonErr];
+            if (jsonErr) {
+                [weakself showAlert];
+                return ;
+            }else{
+                _selectedIndex = [responseObject[@"data"][@"selectedIndex"] integerValue];
+                [weakself loadTabbar:buttonItems];
+                // 链接融云
+                [weakself connectRCloud];
+            }
+        }
+    } failure:^(NSError *err) {
+        [MBProgressHUD hideHUDForView:weakself.view animated:YES];
+        [weakself showAlert];}
+     ];
+    
 
 }
 
@@ -86,42 +114,13 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
 }
 
 
-// 加载 tabbar controllers
-- (void)addControllers{
-    __weak typeof (self)weakself = self;
-    
-    [MBProgressHUD showMessag:@"加载数据...." toView:self.view];
-    [GFNetworkHelper GET:WebViewURL parameters:nil success:^(id responseObject) {
-        [MBProgressHUD hideHUDForView:weakself.view animated:YES];
-        if (![responseObject[@"success"] boolValue]) {
-            [weakself showAlert];
-        }else{
-            NSError *jsonErr;
-            NSArray *buttonItems = [NSJSONSerialization JSONObjectWithData:[responseObject[@"data"][@"app_mainbutton"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:&jsonErr];
-            if (jsonErr) {
-                [weakself showAlert];
-                return ;
-            }else{
-                _selectedIndex = [responseObject[@"data"][@"selectedIndex"] integerValue];
-                [weakself loadTabbar:buttonItems];
-                
-                // 链接融云
-                [weakself connectRCloud];
-            }
-        }
-    } failure:^(NSError *err) {
-        [MBProgressHUD hideHUDForView:weakself.view animated:YES];
-        [weakself showAlert];}
-     ];
-}
-
 
 - (void)showAlert{
     [GFAlertView showAlertWithTitle:@"提示" message:@"数据加载失败..." completionBlock:^(NSUInteger buttonIndex, GFAlertView *alertView) {
         if (buttonIndex == 0) {
             [UIApplication sharedApplication].delegate.window.rootViewController = MAINSTORYBOARD(@"GFLoginNavigationController");
         }else{
-            [self addControllers];
+            [self requestWebsiteInfoFromServer];
         }
     } cancelButtonTitle:@"重新登录" otherButtonTitles:@"重试",nil];
 }
