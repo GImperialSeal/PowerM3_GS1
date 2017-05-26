@@ -17,6 +17,7 @@ typedef NS_ENUM(NSInteger, GFReplaceRootViewOptions) {
 @class LoginSuccessedDataSource;
 @interface GFCommonHelper : NSObject
 
+// 登录的接口
 + (void)login:(NSString *)username code:(NSString *)password completion:(void(^)(LoginSuccessedDataSource *obj))complete failure:(void(^)(NSError *error))fail;
 
 
@@ -26,6 +27,7 @@ typedef NS_ENUM(NSInteger, GFReplaceRootViewOptions) {
 // 
 + (void)setJPushAlias:(NSString *)alias;
 
+// 替换跟视图
 + (void)replaceRootViewControllerOptions:(GFReplaceRootViewOptions)options;
 
 
