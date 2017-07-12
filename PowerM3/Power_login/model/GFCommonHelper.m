@@ -12,7 +12,6 @@
 #import "UIActivityIndicatorView+AFNetworking.h"
 #import "NSString+Extension.h"
 #import "AppDelegate.h"
-
 #import "GFTabBarController.h"
 #import "GFMenuViewController.h"
 
@@ -24,12 +23,18 @@
 @implementation GFCommonHelper
 
 + (GFWebsiteCoreDataModel *)currentWebSite{
-    GFWebsiteCoreDataModel *model = [GFWebsiteCoreDataModel MR_findFirstByAttribute:@"url" withValue:POWERM3URL];
-    if (!model) {
-        model = [GFWebsiteCoreDataModel MR_createEntity];
-        model.url = POWERM3URL;
+    
+    if (POWERM3URL&&POWERM3URL.length) {
+        GFWebsiteCoreDataModel *model = [GFWebsiteCoreDataModel MR_findFirstByAttribute:@"url" withValue:POWERM3URL];
+        
+        if (!model) {
+            model = [GFWebsiteCoreDataModel MR_createEntity];
+            model.url = POWERM3URL;
+            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+        }
+        return model;
     }
-    return model;
+    return nil;
 }
 
 + (void)websiteSetValue:(id)value forKey:(NSString *)key{
@@ -41,9 +46,12 @@
 + (void)replaceRootViewControllerOptions:(GFReplaceRootViewOptions)options{
     switch (options) {
         case ReplaceWithTabbarController:{
+            
+            
             AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
             app.drawViewController = [[GFDrawViewController alloc]initWithRootViewController:[[GFTabBarController alloc]init]];
             app.drawViewController.menuViewController = [[UINavigationController alloc]initWithRootViewController:[[GFMenuViewController alloc]init]];
+            
             [UIApplication sharedApplication].delegate.window.rootViewController = app.drawViewController;
 
             break;
@@ -66,8 +74,11 @@
     
     NSDictionary  *parametersDic = @{@"userName":[self  HloveyRC4:username key:@"PowerM3"],
                                      @"password":[self  HloveyRC4:password key:@"PowerM3"]};
+    
+    
     [GFNetworkHelper POST:NormalLogin parameters:parametersDic success:^(id jsonDic) {
         BLog(@"login   in        : %@",jsonDic);
+        
         if ([jsonDic[@"success"] boolValue]) {
             LoginSuccessedDataSource *model = [[LoginSuccessedDataSource alloc]initWithJsonDict:jsonDic[@"data"]];
             
@@ -80,6 +91,11 @@
             }
         }
     } failure:^(NSError *error) {
+        
+        NSLog(@"error: %@",error);
+        
+        
+        
         if (fail) {
             fail([GFDomainError errorCode:GFErrorNONetwork localizedDescript:@"网络连接失败 "]);
         }
@@ -108,8 +124,6 @@
     [GFNetworkHelper POST:CheckSession
                parameters:dic
                   success:^(id responseObject) {
-                      
-                      
                       if([responseObject[@"success"] boolValue]){
                           if (completion) {
                               completion();
@@ -196,7 +210,8 @@
 
 // core data 保存用户信息
 + (void)addWebsiteWithModel:(LoginSuccessedDataSource *)model user:(NSString *)admin code:(NSString *)password{
-    GFWebsiteCoreDataModel *info = [GFCommonHelper currentWebSite];
+ 
+    GFWebsiteCoreDataModel *info = [self currentWebSite];
     info.headImage = POWERSERVERFILEPATH(model.app_smallheadid);
     info.phone = model.app_mobile;
     info.email = model.app_email;

@@ -44,8 +44,7 @@
     return _allGroups.count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     ZFSettingGroup *group = _allGroups[section];
     return group.items.count;
 }

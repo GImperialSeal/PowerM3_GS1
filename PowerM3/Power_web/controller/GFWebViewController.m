@@ -50,14 +50,8 @@
     [self.navigationController.navigationBar addSubview:_progressView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNotiFromMenuViewController:) name:@"reloadWebView" object:nil];
     
-    if (self.executeJSFunctionWhenClosedWebView&&![self.executeJSFunctionWhenClosedWebView isEqualToString:@"undefined"]&&self.executeJSFunctionWhenClosedWebView.length) {
-        NSInteger index = self.navigationController.viewControllers.count-1;
-         GFWebViewSubViewController *subWeb = self.navigationController.viewControllers[index];
-        
-         BLog(@"妈呀😱: %@  index: %ld",subWeb,(long)index);
-        
-        
-        [subWeb.context[_executeJSFunctionWhenClosedWebView] callWithArguments:@[@""]];
+    if (self.executeJSFunctionWhenClosedWebView && ![self.executeJSFunctionWhenClosedWebView isEqualToString:@"undefined"]  && self.executeJSFunctionWhenClosedWebView.length) {
+        [self.context[_executeJSFunctionWhenClosedWebView] callWithArguments:nil];
     }
 }
 

@@ -158,15 +158,12 @@ static NSString *_format; // 文件格式
             [formData appendPartWithFileData:imgData name:@"FileData" fileName:[NSString stringWithFormat:@"%@.png",[self randomString]] mimeType:@"image/jpeg"];
             i++;
         }
-        
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         if (progress) {
             progress(1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
         }
-        
     } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable responseObject) {
         success(responseObject);
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(error);
     }];

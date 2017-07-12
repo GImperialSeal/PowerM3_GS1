@@ -18,6 +18,11 @@
 
 @implementation GFMenuViewController
 
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    _searchController.active = NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -30,6 +35,8 @@
     _searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
     _searchController.searchResultsUpdater = self;
     _searchController.searchBar.tintColor = [UIColor blackColor];
+    _searchController.dimsBackgroundDuringPresentation = NO;
+    _searchController.obscuresBackgroundDuringPresentation = NO;
     self.definesPresentationContext = YES;
     [self.tableView setTableHeaderView:_searchController.searchBar];
 
@@ -66,9 +73,6 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (_searchController.isActive) {
@@ -86,6 +90,8 @@
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"id"];
             cell.textLabel.font = PingFangSCRegular(15);
         }
+        
+
         PowerProjectListModel *model = self.fetchResultArray[indexPath.row];
         cell.textLabel.text = model.project_name;
         return cell;
@@ -111,11 +117,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    PowerProjectListModel *model = nil;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (_searchController.isActive) {
-        [self.navigationController pushViewController:[UIViewController new] animated:YES];
+         model = self.fetchResultArray[indexPath.row];
+    }else{
+        model = self.sourceArray[indexPath.row];
     }
-    PowerProjectListModel *model = self.sourceArray[indexPath.row];
     [GFNetworkHelper GET:[NSString stringWithFormat:@"%@%@",ProjectGuid,model.project_guid] parameters:nil success:^(id responseObject) {
         if ([responseObject[@"success"] boolValue]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadWebView" object:model.project_name];
@@ -126,6 +134,5 @@
     } failure:^(NSError *err) {
         [GFAlertView alertWithTitle:@"加载失败"];
     }];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 @end

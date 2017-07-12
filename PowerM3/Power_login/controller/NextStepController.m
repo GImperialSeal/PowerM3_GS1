@@ -63,7 +63,6 @@
     _passWord.leftViewMode = UITextFieldViewModeAlways;
     _passWord.secureTextEntry = YES;
     
-    
     [GFNetworkHelper GET:WebsiteInfo parameters:nil success:^(id responseObject) {
         LoginDataSource *model = [[LoginDataSource alloc]initWithJsonDict:responseObject[@"data"]];
         
@@ -83,7 +82,6 @@
     } failure:^(NSError *err) {
         
     }];
-
 }
 
 
@@ -100,7 +98,7 @@
         [weakself downloadApp_webCookies:model.app_downloadCookie];
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:weakself.view animated:YES];
-        [GFAlertView showAlertWithTitle:@"提示" message:[GFDomainError localizedDescription:error] completionBlock:^(NSUInteger buttonIndex, GFAlertView *alertView) {
+        [GFAlertView showAlertWithTitle:@"提示" message:@"当前网络不可用, 请检查网络(权限)设置" completionBlock:^(NSUInteger buttonIndex, GFAlertView *alertView) {
             if (buttonIndex == 1) {
                 [weakself clickLoginButton:sender];
             }
@@ -138,7 +136,6 @@
 - (void)unArchiveFileWithName:(NSURL *)URL{
     
     BLog(@"(***********  开始解压  **********");
-
     // 解压
     NSString *zipPath = URL.path;
     NSString *unzipPath = [self cacheSavePath];
@@ -147,15 +144,12 @@
         BOOL ret = [archive UnzipFileTo:unzipPath overWrite:YES];
         if (!ret){
             [archive UnzipCloseFile];
-            
              BLog(@"(***********8erro");
         }else{
             [GFUserDefault setBool:YES forKey:@"unarchive_zip"];
-            
         }
     }else{
         BLog(@"(*********** zip **********");
-
     }
 }
 

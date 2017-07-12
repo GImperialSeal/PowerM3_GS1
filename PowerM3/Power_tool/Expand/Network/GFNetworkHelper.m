@@ -39,13 +39,13 @@ static GFNetworkHelper *network = nil;
         [self.requestSerializer didChangeValueForKey:@"timeoutInterval"];
         self.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",@"application/atom+xml",@"application/xml",@"text/xml", @"image/*"]];
         self.securityPolicy=[AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
-        [self.requestSerializer setValue:[[[UIWebView alloc]init] stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"] forHTTPHeaderField:@"User-Agent"];
         self.operationQueue.maxConcurrentOperationCount = 2;
     }
     return self;
 }
 
 + (void)POST:(NSString *)url parameters:(NSDictionary *)parameters success:(requestSuccess)completion failure:(requestFailure)failure{
+    //if (![self isNetwork]) return;
     [kNetworkHelper POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (completion) {
             completion(responseObject);
@@ -58,6 +58,7 @@ static GFNetworkHelper *network = nil;
 }
 
 + (void)GET:(NSString *)url parameters:(NSDictionary *)parameters success:(requestSuccess)completion failure:(requestFailure)failure{
+    //if (![self isNetwork]) return;
     [kNetworkHelper GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if (completion) {
@@ -172,27 +173,24 @@ static GFNetworkHelper *network = nil;
 
 #pragma mark - 开始监听网络
 + (void)networkStatusWithBlock:(networkStatus)networkStatus {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-            switch (status) {
-                    
-                case AFNetworkReachabilityStatusUnknown:
-                    networkStatus ? networkStatus(NetworkStatusUnknown) : nil;
-                    break;
-                case AFNetworkReachabilityStatusNotReachable:
-                    networkStatus ? networkStatus(NetworkStatusNotReachable) : nil;
-                    break;
-                case AFNetworkReachabilityStatusReachableViaWWAN:
-                    networkStatus ? networkStatus(NetworkStatusReachableViaWWAN) : nil;
-                    break;
-                case AFNetworkReachabilityStatusReachableViaWiFi:
-                    networkStatus ? networkStatus(NetworkStatusReachableViaWiFi) : nil;
-                    break;
-            }
-        }];
-    });
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+            case AFNetworkReachabilityStatusUnknown:
+                networkStatus ? networkStatus(NetworkStatusUnknown) : nil;
+                break;
+            case AFNetworkReachabilityStatusNotReachable:
+                //[GFAlertView alertWithTitle:@"当前网络不可用, 请检查网络(权限)设置"];
+                networkStatus ? networkStatus(NetworkStatusNotReachable) : nil;
+                break;
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                networkStatus ? networkStatus(NetworkStatusReachableViaWWAN) : nil;
+                break;
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                networkStatus ? networkStatus(NetworkStatusReachableViaWiFi) : nil;
+                break;
+        }
+    }];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 }
 
 

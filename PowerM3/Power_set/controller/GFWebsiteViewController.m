@@ -75,13 +75,38 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     GFWebsiteCoreDataModel *info = [GFWebsiteCoreDataModel MR_findAll][indexPath.row];
     if (![info.url isEqualToString:POWERM3URL]) {
+        __weak typeof(self) weakSelf = self;
+
         [GFAlertView showAlertWithTitle:@"" message:[NSString stringWithFormat:@"是否要切换到站点: %@ ",info.url] completionBlock:^(NSUInteger buttonIndex, GFAlertView *alertView) {
             if (buttonIndex == 1) {
                 [GFUserDefault setValue:info.url forKey:PowerOnWebsiteUserDefaultKey];
-                [GFCommonHelper replaceRootViewControllerOptions:ReplaceWithLoginController];
+                [weakSelf autoLogin];
             }
         } cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
     }
+}
+
+
+- (void)autoLogin{
+    GFWebsiteCoreDataModel *model = [GFCommonHelper currentWebSite];
+    if (model.url&&model.url.length&&model.admin&&model.admin.length&&model) {
+        __weak typeof(self) weakSelf = self;
+        NSString *userName = model.admin;
+        NSString *code     = model.password;
+        [GFCommonHelper replaceRootViewControllerOptions:ReplaceWithTabbarController];
+        [GFCommonHelper login:userName code:code completion:^(LoginSuccessedDataSource *obj) {
+            
+        }failure:^(NSError *error) {
+            [GFAlertView showAlertWithTitle:@"提示" message:[GFDomainError localizedDescription:error] completionBlock:^(NSUInteger buttonIndex, GFAlertView *alertView) {
+                if (buttonIndex == 0) {
+                    [GFCommonHelper replaceRootViewControllerOptions:ReplaceWithLoginController];
+                }else{
+                    [weakSelf autoLogin];
+                }
+            } cancelButtonTitle:@"重新登录" otherButtonTitles:@"重试",nil];
+        }];
+    }
+
 }
 
 @end

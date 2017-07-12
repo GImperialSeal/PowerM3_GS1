@@ -49,7 +49,6 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
     
     self.view.backgroundColor = [UIColor whiteColor];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:GFThemeColor} forState:UIControlStateSelected];
-    
     [self requestWebsiteInfoFromServer];
 }
 
@@ -76,7 +75,8 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
         }
     } failure:^(NSError *err) {
         [MBProgressHUD hideHUDForView:weakself.view animated:YES];
-        [weakself showAlert];}
+        //[weakself showAlert];
+    }
      ];
     
 
@@ -116,7 +116,9 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
 
 
 - (void)showAlert{
-    [GFAlertView showAlertWithTitle:@"提示" message:@"数据加载失败..." completionBlock:^(NSUInteger buttonIndex, GFAlertView *alertView) {
+    [GFAlertView showAlertWithTitle:@"提示" message:@"数据加载...失败..." completionBlock:^(NSUInteger buttonIndex, GFAlertView *alertView) {
+        
+        
         if (buttonIndex == 0) {
             [UIApplication sharedApplication].delegate.window.rootViewController = MAINSTORYBOARD(@"GFLoginNavigationController");
         }else{
@@ -176,6 +178,8 @@ static NSInteger _selectedIndex;// 默认显示 tabbar index
     
     BLog(@" user id: %@ ",coredataInfo.humanID);
     [GFNetworkHelper POST:GetRongCloudToken parameters:@{@"userid":coredataInfo.humanID,@"name":@"",@"portraituri":coredataInfo.headImage} success:^(id responseObject) {
+        
+        
         [[GFRCloudHelper shareInstace] loginRongCloudWithUserInfo:userinfo withToken:responseObject[@"token"]];
         
     } failure:^(NSError *error) {

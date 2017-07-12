@@ -86,7 +86,6 @@
         
         [weakself refreshBadgeValue];
         
-        
 //        [weakself syncFriendList:^(NSArray *friends, BOOL isSuccess) {
 //            
 //        }];

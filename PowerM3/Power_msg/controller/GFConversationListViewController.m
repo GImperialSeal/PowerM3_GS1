@@ -51,7 +51,6 @@
         if (isSuccess) [weakself sortArr:friends];
         else BLog(@"刷新失败");
     }];
-
     
     [self setUI];
 }

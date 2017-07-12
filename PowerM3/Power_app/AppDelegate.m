@@ -37,12 +37,18 @@ typedef NS_ENUM(NSInteger, ReceivedNoticationMode) {
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    // 先初始化 coredata 然后才能登录
     [MagicalRecord setupCoreDataStackWithStoreNamed:@"CoreData.splite"];
-    
+
     //[GFUserInfoCoreDataModel deleteAllEntity];
     
     //[self registerJPushWithOptions:launchOptions];
     [[GFRCloudHelper shareInstace] initRCIMWithOptions:launchOptions];
+    
+    [GFNetworkHelper networkStatusWithBlock:^(NetworkStatusType status) {
+        
+    }];
+
     [self autoLogin];
 
     // 收到通知跳转到指定界面
@@ -57,20 +63,16 @@ typedef NS_ENUM(NSInteger, ReceivedNoticationMode) {
 #pragma mark - login
 - (void)autoLogin{
     GFWebsiteCoreDataModel *model = [GFCommonHelper currentWebSite];
-    if (model.url&&model.url.length&&model.admin&&model.admin.length) {
-                
+    if (model.url&&model.url.length&&model.admin&&model.admin.length&&model) {
         __weak typeof(self) weakSelf = self;
         NSString *userName = model.admin;
         NSString *code     = model.password;
-        // [MBProgressHUD showMessag:@"正在登录...." toView:nil];
+        [GFCommonHelper replaceRootViewControllerOptions:ReplaceWithTabbarController];
         [GFCommonHelper login:userName code:code completion:^(LoginSuccessedDataSource *obj) {
-            [MBProgressHUD hideHUDForView:nil animated:YES];
-            // 加载mainview
-            [GFCommonHelper replaceRootViewControllerOptions:ReplaceWithTabbarController];
             
         }failure:^(NSError *error) {
-            [MBProgressHUD hideHUDForView:nil animated:YES];
-            [GFAlertView showAlertWithTitle:@"提示" message:[GFDomainError localizedDescription:error] completionBlock:^(NSUInteger buttonIndex, GFAlertView *alertView) {
+            
+            [GFAlertView showAlertWithTitle:@"提示" message:@"登录失败,请检查网络设置" completionBlock:^(NSUInteger buttonIndex, GFAlertView *alertView) {
                 if (buttonIndex == 0) {
                     [GFCommonHelper replaceRootViewControllerOptions:ReplaceWithLoginController];
                 }else{
